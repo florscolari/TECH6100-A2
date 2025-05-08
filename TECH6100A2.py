@@ -4,6 +4,11 @@
 
 # Out of scope: global command to cancel an ongoing task.
 
+#PEP 8 Naming Conventions:
+# Variable name: lowercase_with_underscores - user_name
+# Function name: verb_lowercase_underscore - send_email()
+# Class name: CapitaliseWords - UseNouns
+
 from enum import StrEnum
 
 class BookGenre(StrEnum):
@@ -15,11 +20,11 @@ class BookGenre(StrEnum):
     BIOGRAPHY = "Biography"
 
     @staticmethod
-    def showAvailable():
-        availableBookGenre = [BookGenre.FICTION, BookGenre.NONFICTION, BookGenre.SCIFI, BookGenre.MYSTERY, BookGenre.BIOGRAPHY]
+    def show_available():
+        available_book_genre = [BookGenre.FICTION, BookGenre.NONFICTION, BookGenre.SCIFI, BookGenre.MYSTERY, BookGenre.BIOGRAPHY]
         print("Available Book Genres:")
-        for bookgenre in availableBookGenre:
-            print(bookgenre)
+        for genre in available_book_genre:
+            print(genre)
 
 class BookFormat(StrEnum):
     """Creating set of immutable values for book formats"""
@@ -29,11 +34,11 @@ class BookFormat(StrEnum):
     AUDIOBOOK = "Audiobook"
 
     @staticmethod
-    def showAvailable():
-        availableBookFormat = [BookFormat.HARDCOVER, BookFormat.PAPERBACK, BookFormat.EBOOK, BookFormat.AUDIOBOOK]
+    def show_available():
+        available_book_format = [BookFormat.HARDCOVER, BookFormat.PAPERBACK, BookFormat.EBOOK, BookFormat.AUDIOBOOK]
         print("Available Book Formats:")
-        for bookformat in availableBookFormat:
-            print(bookformat)
+        for bformat in available_book_format:
+            print(bformat)
 
 
 class Language(StrEnum):
@@ -44,15 +49,14 @@ class Language(StrEnum):
     FRENCH = "French"
 
     @staticmethod
-    def showAvailable():
-        availableLanguage = [Language.ENGLISH, Language.SPANISH, Language.PORTUGUESE, Language.FRENCH]
+    def show_available():
+        available_language = [Language.ENGLISH, Language.SPANISH, Language.PORTUGUESE, Language.FRENCH]
         print("Available Languages:")
-        for lang in availableLanguage:
+        for lang in available_language:
             print(lang)
 
 
 class Book:
-
     def __init__(self, title, author, price, quantity, book_genre: BookGenre, isbn, publication_year,
                  language: Language,
                  publisher,
@@ -92,96 +96,104 @@ class Book:
 
 
     #Book Getters
-    def getTitle(self):
+    def get_title(self):
         return self.__title
 
-    def getAuthor(self):
+    def get_author(self):
         return self.__author
 
-    def getPrice(self):
+    def get_price(self):
         return self.__price
 
-    def getQuantity(self):
+    def get_quantity(self):
         return self.__quantity
 
-    def getBookGenre(self):
+    def get_book_genre(self):
         return self.__book_genre
 
-    def getIsbn(self):
+    def get_isbn(self):
         return self.__isbn
 
-    def getPublicationYear(self):
+    def get_publication_year(self):
         return self.__publication_year
 
-    def getPublisher(self):
+    def get_publisher(self):
         return self.__publisher
 
-    def getLanguage(self) -> Language: # Return value of type: Language
+    def get_language(self) -> Language: # Return value of type: Language
         return self.__language
 
-    def getBookFormat(self):
+    def get_book_format(self):
         return self.__book_format
 
     # Book Setters
-    def setTitle(self, value):
+    def set_title(self, value):
         self.__title = value
 
-    def setAuthor(self, value):
+    def set_author(self, value):
         self.__author = value
 
-    def setPrice(self, value):
+    def set_price(self, value):
         self.__price = value
 
-    def setQuantity(self, value):
+    def set_quantity(self, value):
         self.__quantity = value
 
     """Set Book Genre if is within class BookGenre. If not -> show message"""
-    def setBookGenre(self, new_book_genre: BookGenre):
+    def set_book_genre(self, new_book_genre: BookGenre):
         self.__book_genre = new_book_genre
         if not isinstance(new_book_genre, BookGenre):
             raise ValueError(
                 "Book Genre must be one of available book genre options. Or contact the Administrator to add a new "
                 "one.")
 
-    def setIsbn(self, value):
+    def set_isbn(self, value):
         self.__isbn = value
 
-    def setPublicationYear(self, value):
+    def set_publication_year(self, value):
         self.__publication_year = value
 
-    def setPublisher(self, value):
+    def set_publisher(self, value):
         self.__publisher = value
 
     """Set Language if is within class Language. If not -> show message"""
-    def setLanguage(self, new_language: Language):
+    def set_language(self, new_language: Language):
         self.__language = new_language
         if not isinstance(new_language, Language):
             raise ValueError("Language must be one of available language options. Or contact the Administrator to add a new one.")
 
     """Set Book Format if is within class BookFormat. If not -> show message"""
-    def setBookFormat(self, new_book_format: BookFormat):
+    def set_book_format(self, new_book_format: BookFormat):
         self.__book_format = new_book_format
         if not isinstance(new_book_format, BookFormat):
             raise ValueError("Book format must be one of available book format options. Or contact the Administrator "
                              "to add a new one.")
 
-
-book1 = (Book("title", "John Doe", 25, 2, BookGenre.SCIFI, "1234ases", 1987, Language.SPANISH, "Planet Editions",
+#6 books added to have data to handle when the program starts
+book1 = (Book("Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
          BookFormat.PAPERBACK) )
-book2 = Book("title2", "author2", 45, 1, BookGenre.FICTION, "qwert1", 1988, Language.FRENCH, "Planeta",
+book2 = Book("The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
+             BookFormat.HARDCOVER)
+book3 = Book("The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
+             BookFormat.HARDCOVER)
+book4 = Book("Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
              BookFormat.PAPERBACK)
+book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
+             BookFormat.EBOOK)
+book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
+             BookFormat.HARDCOVER)
 
 
 #todo: when user input for BookGenre, BookFormat & Language -> options must be displayed, grab user selection and do
 # a comparison. They can be added as direct values.
 
-print(book1.getTitle())
+print(book1.get_title())
 print(book1)
-book1.setAuthor("new guy")
-book1.setLanguage(Language.FRENCH)
+book1.set_author("new guy")
+book1.set_language(Language.FRENCH)
 print(book1)
-Language.showAvailable()
-BookFormat.showAvailable()
-BookGenre.showAvailable()
-book1.setLanguage(Language.PORTUGUESE)
+Language.show_available()
+BookFormat.show_available()
+BookGenre.show_available()
+book1.set_language(Language.PORTUGUESE)
 print(book1)
