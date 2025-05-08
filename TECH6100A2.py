@@ -1,7 +1,10 @@
+# TECH6100 Assessment 2 Florencia Scolari ID 1847863 May 2025
+# Check the full project and references on the GitHub Public Repo https://github.com/florscolari/TECH6100-A2.git
+#todo: check & complete out-of-scope features
+
+# Out of scope: global command to cancel an ongoing task.
 
 from enum import StrEnum
-
-
 
 class BookGenre(StrEnum):
     """Creating set of immutable values for types of book"""
