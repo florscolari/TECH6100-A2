@@ -183,6 +183,17 @@ book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781
 book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
              BookFormat.HARDCOVER)
 
+#todo: Write User class
+#Attributes: first_name: str, last_name: str, username: str, email: str, password: str, phone_number: str,  shipping_address (object/string), purchase_history (array/object)
+#todo: USER: getters for 8 attributes above (6 easy, 2 to investigate)
+
+#todo: USER: setters for 8 attributes above (6 easy, 2 to investigate)
+
+
+#todo: write Order class
+
+
+
 
 #todo: when user input for BookGenre, BookFormat & Language -> options must be displayed, grab user selection and do
 # a comparison. They can be added as direct values.
