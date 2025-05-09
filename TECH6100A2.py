@@ -169,32 +169,29 @@ class Book:
             raise ValueError("Book format must be one of available book format options. Or contact the Administrator "
                              "to add a new one.")
 
-#6 books added to have data to handle when the program starts
-book1 = (Book("Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
-         BookFormat.PAPERBACK) )
-book2 = Book("The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
-             BookFormat.HARDCOVER)
-book3 = Book("The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
-             BookFormat.HARDCOVER)
-book4 = Book("Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
-             BookFormat.PAPERBACK)
-book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
-             BookFormat.EBOOK)
-book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
-             BookFormat.HARDCOVER)
+
+class ShippingAddress:
+    def __init__(self, street, city, state, postal_code, country):
+        self.__street: str = street
+        self.__city: str = city
+        self.__state: str = state
+        self.__zip_code: str = postal_code
+        self.__country: str = country
+
+    def __str__(self):
+        return f"{self.__street} {self.__city} {self.__state} ({self.__zip_code}) {self.__country}\n"
 
 
 class User:
-    def __init__(self, first_name, last_name, username, email, password, phone_number, shipping_address,
-                 purchase_history):
+    def __init__(self, first_name, last_name, username, email, password, phone_number):
         self.__first_name : str = first_name
         self.__last_name : str = last_name
         self.__username : str = username
         self.__email : str = email
         self.__password : str = password
         self.__phone_number : str = phone_number
-        self.__shipping_address = shipping_address #todo: new class for this one? shipping_address (object/string)
-        self.__purchase_history = purchase_history  # todo: new class for this one? purchase_history (array/object)
+        self.shipping_address = None #Here I found the concept of Composition
+        self.__purchase_history = None  # todo: new class for this one? purchase_history (array/object)
 
     #To display data from a class object to users
     def __str__(self):
@@ -203,7 +200,7 @@ class User:
                 f"Password: {self.__password}\n"
                 f"Name: {self.__first_name} {self.__last_name}\n"
                 f"Phone Number: {self.__phone_number}\n"
-                f"Shipping Address: {self.__shipping_address}\n"
+                f"Shipping Address: {self.shipping_address}\n"
                 f"Purchase History:\n {self.__purchase_history}" #todo: count previous purchases & show details?
         )
 
@@ -220,9 +217,25 @@ class User:
                 # show details?
         )
 
-#todo: USER __str__
-#todo: USER __repr__
+#6 BOOKS added to have data to handle when the program starts
+book1 = (Book("Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
+         BookFormat.PAPERBACK) )
+book2 = Book("The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
+             BookFormat.HARDCOVER)
+book3 = Book("The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
+             BookFormat.HARDCOVER)
+book4 = Book("Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
+             BookFormat.PAPERBACK)
+book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
+             BookFormat.EBOOK)
+book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
+             BookFormat.HARDCOVER)
 
+#6 USERS added to have data to handle when the program starts
+user1 = User("Flor", "Scolari", "fscolari", "fscolari@gmail.com", "FSbooks!12", "415851000")
+print(user1)
+user1.shipping_address = ShippingAddress("123 Elm Street", "San Francisco", "CA", "94102", "USA")
+print(user1)
 # todo: USER: getters for 8 attributes above (6 easy, 2 to investigate)
 
 #todo: USER: setters for 8 attributes above (6 easy, 2 to investigate)
