@@ -198,6 +198,27 @@ class User:
 
     #To display data from a class object to users
     def __str__(self):
+        return (f"------\n"
+                f"Username: {self.__username}\n"
+                f"Password: {self.__password}\n"
+                f"Name: {self.__first_name} {self.__last_name}\n"
+                f"Phone Number: {self.__phone_number}\n"
+                f"Shipping Address: {self.__shipping_address}\n"
+                f"Purchase History:\n {self.__purchase_history}" #todo: count previous purchases & show details?
+        )
+
+    # To display data from a class object to programmers
+    def __repr__(self):
+        return (f"------\n"
+                f"Username: {self.__username} : {type(self.__username)}\n"
+                f"Password: {self.__password} : {type(self.__password)}\n"
+                f"Name: {self.__first_name} : {type(self.__first_name)} + {self.__last_name} :"
+                f" {type(self.__last_name)}\n"
+                f"Phone Number: {self.__phone_number} : {type(self.__phone_number)}\n"
+                f"Shipping Address: {self.__shipping_address} : {type(self.__shipping_address)}\n"
+                f"Purchase History:\n {self.__purchase_history} : {type(self.__purchase_history)}" #todo: count previous purchases &
+                # show details?
+        )
 
 #todo: USER __str__
 #todo: USER __repr__
