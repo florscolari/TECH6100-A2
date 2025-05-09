@@ -179,7 +179,7 @@ class ShippingAddress:
         self.__country: str = country
 
     def __str__(self):
-        return f"{self.__street} {self.__city} {self.__state} ({self.__zip_code}) {self.__country}\n"
+        return f"{self.__street} {self.__city} {self.__state} ({self.__zip_code}) {self.__country}"
 
 
 class User:
@@ -195,25 +195,31 @@ class User:
 
     #To display data from a class object to users
     def __str__(self):
+        if self.__shipping_address is None:
+            self.__shipping_address = "-"
+
+        if self.__purchase_history is None:
+            self.__purchase_history = "-"
+
         return (f"------\n"
-                f"Username: {self.__username}\n"
-                f"Password: {self.__password}\n"
                 f"Name: {self.__first_name} {self.__last_name}\n"
-                f"Phone Number: {self.__phone_number}\n"
+                f"Username: {self.__username}\n"
+                f"Phone Number: {self.__phone_number}\n" #todo: placeholders to display pretty phone: +44-20-7946-0636?
                 f"Shipping Address: {self.__shipping_address}\n"
-                f"Purchase History:\n {self.__purchase_history}" #todo: count previous purchases & show details?
+                f"Purchase History: {self.__purchase_history}" #todo: count previous purchases & show details?
         )
 
     # To display data from a class object to programmers
     def __repr__(self):
         return (f"------\n"
-                f"Username: {self.__username} : {type(self.__username)}\n"
-                f"Password: {self.__password} : {type(self.__password)}\n"
                 f"Name: {self.__first_name} : {type(self.__first_name)} + {self.__last_name} :"
                 f" {type(self.__last_name)}\n"
+                f"Username: {self.__username} : {type(self.__username)}\n"
+                f"Password: {self.__password} : {type(self.__password)}\n"
                 f"Phone Number: {self.__phone_number} : {type(self.__phone_number)}\n"
                 f"Shipping Address: {self.__shipping_address} : {type(self.__shipping_address)}\n"
-                f"Purchase History:\n {self.__purchase_history} : {type(self.__purchase_history)}" #todo: count previous purchases &
+                f"Purchase History: {self.__purchase_history} : {type(self.__purchase_history)}" #todo: count
+                # previous purchases &
                 # show details?
         )
 
@@ -242,14 +248,33 @@ class User:
     def get_purchase_history(self):
         return self.__purchase_history
 
-    # todo: USER: setters for 8 attributes above (6 easy, 2 to investigate)
-    # first_name, last_name, username, email, password, phone_number, shipping_address & purchase_history
-
     # User Setters:
-    def set_title(self, value):
-        self.__title = value
+    def set_first_name(self, value):
+        self.__first_name = value
 
+    def set_last_name(self, value):
+        self.__last_name = value
 
+    def set_username(self, value):
+        self.__username = value
+
+    def set_email(self, value):
+        self.__email = value
+
+    def set_password(self, value):
+        self.__password = value
+
+    def set_phone_number(self, value):
+        self.__phone_number = value
+
+    """Set Shipping Address if is within ShippingAddress class. If not -> show message"""
+    def set_shipping_address(self,value):
+        if isinstance(value, ShippingAddress):
+            self.__shipping_address = value
+        else:
+            raise TypeError("The shipping address must be valid.")
+
+    #todo: Don't think I need to set a purchase history, I need to calculate it & get it
 
 
 #6 BOOKS added to have data to handle when the program starts
@@ -266,14 +291,36 @@ book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781
 book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
              BookFormat.HARDCOVER)
 
-#6 USERS added to have data to handle when the program starts
-user1 = User("Flor", "Scolari", "fscolari", "fscolari@gmail.com", "FSbooks!12", "415851000")
-print(user1)
-user1.shipping_address = ShippingAddress("123 Elm Street", "San Francisco", "CA", "94102", "USA")
-#todo: after set Setters, I need to use user1.set_shipping_address = ShippingAddress(...)
-print(user1.get_shipping_address())
-print(user1.get_phone_number())
+#6 USERS added to have data to handle when the program starts (3 of 6 with Address)
+user_list = []
+user1 = User("Alice", "Nguyen", "booklover92", "alice.nguyen92@outlook.com", "A1ic3!Readz", "12025550136")
+#Method to set shipping address for a user
+address1 = ShippingAddress("123 Elm Street", "San Francisco", "CA", "94102", "USA")
+user1.set_shipping_address(address1)
+user_list.append(user1)
 
+user2 = User("John", "Martinez", "johnny_reads", "john.martinez84@aol.co.uk", "J0hn*Reads2023", "442079460636")
+address2 = ShippingAddress("45 King's Road", "London", "4RY", "SW3", "UK")
+user2.set_shipping_address(address2)
+user_list.append(user2)
+
+user3 = User("Liam", "Taylor", "sci_fi_addict", "liam.taylor_sf@yahoo.com", "L!am4SciFi", "61390101234")
+address3 = ShippingAddress("22 Bourke Street", "Melbourne", "VIC", "3000", "Australia")
+user3.set_shipping_address(address3)
+user_list.append(user3)
+
+user4 = User("Sofia", "Lopez", "mysteryfan22", "sofia.lopez22@gmail.es", "S0fia&Mystery", "34911234567")
+user_list.append(user4)
+
+user5 = User("Michael", "Singh", "read4growth", "michael.singh.reads@example.in", "M1chael#Grow", "912240011122")
+user_list.append(user5)
+
+user6 = User("Monique", "Dubois", "momo_reads", "monique.dubois@outlook.fr", "M0nique!Books", "33123456789")
+user_list.append(user6)
+
+# Print the user list:
+for user in user_list:
+    print(user)
 
 
 #todo: write ORDER class & attributes
