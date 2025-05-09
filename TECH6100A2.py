@@ -324,8 +324,28 @@ for user in user_list:
 
 
 #todo: write ORDER class & attributes
+#Properties: order_id (string), order_date (datetime), status(string), book (Book object), quantity (integer), total_price(float), user (User object), shipping_address (object)
+class Order:
+    def __init__(self, order_id, order_date, order_status, book_list, total_items, total_price, user_id, shipping_address):
+        self.__order_id = order_id
+        self.__order_date = order_date
+        self.__order_status = order_status
+        self.__book_list = book_list #list selected by the user
+        self.__total_items = total_items
+        self.__total_price = total_price
+        self.__user_id = user_id
+        self.__shipping_address = shipping_address
 
 # todo: ORDER __str__
+    def __str__(self):
+        return (f"Order ID: {self.__order_id}\n Created: {self.__order_date}\n"
+                f"Status: {self.__order_status}\n"
+                f"Total Price: {self.__total_price}\t Total items: {self.__total_items}\n"
+                f"Ordered by: {self.__user_id}\n"
+                f"Shipping Address: {self.__shipping_address}\n"
+                f"Order Details:\n")
+    #todo: Create list of ordered books
+
 # todo: ORDER __repr__
 
 # todo: ORDER: getters for 8? attributes above
