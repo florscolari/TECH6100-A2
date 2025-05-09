@@ -190,7 +190,7 @@ class User:
         self.__email : str = email
         self.__password : str = password
         self.__phone_number : str = phone_number
-        self.shipping_address = None #Here I found the concept of Composition
+        self.__shipping_address = None #Here I found the concept of Composition
         self.__purchase_history = None  # todo: new class for this one? purchase_history (array/object)
 
     #To display data from a class object to users
@@ -200,7 +200,7 @@ class User:
                 f"Password: {self.__password}\n"
                 f"Name: {self.__first_name} {self.__last_name}\n"
                 f"Phone Number: {self.__phone_number}\n"
-                f"Shipping Address: {self.shipping_address}\n"
+                f"Shipping Address: {self.__shipping_address}\n"
                 f"Purchase History:\n {self.__purchase_history}" #todo: count previous purchases & show details?
         )
 
@@ -216,6 +216,41 @@ class User:
                 f"Purchase History:\n {self.__purchase_history} : {type(self.__purchase_history)}" #todo: count previous purchases &
                 # show details?
         )
+
+    #User Getters:
+    def get_first_name(self):
+        return self.__first_name
+
+    def get_last_name(self):
+        return self.__last_name
+
+    def get_username(self):
+        return self.__username
+
+    def get_email(self):
+        return self.__email
+
+    def get_password(self):
+        return self.__password
+
+    def get_phone_number(self):
+        return self.__phone_number
+
+    def get_shipping_address(self):
+        return self.__shipping_address
+
+    def get_purchase_history(self):
+        return self.__purchase_history
+
+    # todo: USER: setters for 8 attributes above (6 easy, 2 to investigate)
+    # first_name, last_name, username, email, password, phone_number, shipping_address & purchase_history
+
+    # User Setters:
+    def set_title(self, value):
+        self.__title = value
+
+
+
 
 #6 BOOKS added to have data to handle when the program starts
 book1 = (Book("Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
@@ -235,10 +270,10 @@ book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781
 user1 = User("Flor", "Scolari", "fscolari", "fscolari@gmail.com", "FSbooks!12", "415851000")
 print(user1)
 user1.shipping_address = ShippingAddress("123 Elm Street", "San Francisco", "CA", "94102", "USA")
-print(user1)
-# todo: USER: getters for 8 attributes above (6 easy, 2 to investigate)
+#todo: after set Setters, I need to use user1.set_shipping_address = ShippingAddress(...)
+print(user1.get_shipping_address())
+print(user1.get_phone_number())
 
-#todo: USER: setters for 8 attributes above (6 easy, 2 to investigate)
 
 
 #todo: write ORDER class & attributes
