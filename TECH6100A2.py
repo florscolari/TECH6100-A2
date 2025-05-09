@@ -61,16 +61,16 @@ class Book:
                  language: Language,
                  publisher,
                  book_format: BookFormat):
-        self.__title: str = title
-        self.__author: str = author
-        self.__price: float = price
-        self.__quantity: int = quantity
-        self.__book_genre: BookGenre = book_genre
-        self.__isbn: str = isbn
-        self.__publication_year: int = publication_year
-        self.__publisher: str = publisher
-        self.__language: Language = language
-        self.__book_format: BookFormat = book_format
+        self.__title : str = title
+        self.__author : str = author
+        self.__price : float = price
+        self.__quantity : int = quantity
+        self.__book_genre : BookGenre = book_genre
+        self.__isbn : str = isbn
+        self.__publication_year : int = publication_year
+        self.__publisher : str = publisher
+        self.__language : Language = language
+        self.__book_format : BookFormat = book_format
 
     #To display data from a class object to users
     def __str__(self):
@@ -183,14 +183,39 @@ book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781
 book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
              BookFormat.HARDCOVER)
 
-#todo: Write User class
-#Attributes: first_name: str, last_name: str, username: str, email: str, password: str, phone_number: str,  shipping_address (object/string), purchase_history (array/object)
-#todo: USER: getters for 8 attributes above (6 easy, 2 to investigate)
+
+class User:
+    def __init__(self, first_name, last_name, username, email, password, phone_number, shipping_address,
+                 purchase_history):
+        self.__first_name : str = first_name
+        self.__last_name : str = last_name
+        self.__username : str = username
+        self.__email : str = email
+        self.__password : str = password
+        self.__phone_number : str = phone_number
+        self.__shipping_address = shipping_address #todo: new class for this one? shipping_address (object/string)
+        self.__purchase_history = purchase_history  # todo: new class for this one? purchase_history (array/object)
+
+    #To display data from a class object to users
+    def __str__(self):
+
+#todo: USER __str__
+#todo: USER __repr__
+
+# todo: USER: getters for 8 attributes above (6 easy, 2 to investigate)
 
 #todo: USER: setters for 8 attributes above (6 easy, 2 to investigate)
 
 
-#todo: write Order class
+#todo: write ORDER class & attributes
+
+# todo: ORDER __str__
+# todo: ORDER __repr__
+
+# todo: ORDER: getters for 8? attributes above
+
+# todo: ORDER: setters for 8? attributes above
+
 
 
 
