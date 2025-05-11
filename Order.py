@@ -23,7 +23,7 @@ class Order:
         self.__order_date = timestamp
         self.__order_status : OrderStatus = order_status
         self.__book_list = [] #list of objects as attribute of this object // books selected by the user
-        self.__total_items = 0 #it'll be calculated
+        self.__total_items = 0
         self.__total_amount = 0 #it'll be calculated
         self.__user_email = user_email
         self.__shipping_address = None
@@ -31,7 +31,7 @@ class Order:
     def __str__(self):
         return (f"Order ID: {self.__order_id}\nCreated: {self.__order_date}\n"
                 f"Status: {self.__order_status}\n"
-                f"Total Price: {self.__total_amount}\t Total items: {self.__total_items}\n"
+                f"Total Amount: ${round(self.__total_amount, 2)}\t Total items: {self.__total_items}\n"
                 f"Ordered by: {self.__user_email}\n"
                 f"Shipping Address: {self.__shipping_address}\n"
                 f"Order Details:")
@@ -51,22 +51,10 @@ class Order:
         return self.__user_email
 
     def get_total_items(self):
-        total_items_list = []
-        for book in self.__book_list:
-            ind_book = book.get_title()
-            total_items_list.append(ind_book)
-        data = len(total_items_list)
-        self.__total_items = data
         return self.__total_items
 
     def get_total_amount(self):
-        price_list = []
-        for book in self.__book_list:
-            ind_price = book.get_price()
-            price_list.append(ind_price)
-        total_amount = sum(price_list)
-        total_amount = round(total_amount, 2)
-        return total_amount
+        return self.__total_amount
 
 
     #todo: How can I know based on user email, which shipping address is correlated?
@@ -93,11 +81,13 @@ class Order:
     #Other Order Methods
     def add_book_to_order(self, book: Book):
         self.__book_list.append(book)
-        self.__total_items += 1
+        self.__total_items = len(self.__book_list)
+        self.__total_amount += book.get_price()
 
     def remove_book_from_order(self, book: Book):
         self.__book_list.remove(book)
-        self.__total_items -= 1
+        self.__total_items = len(self.__book_list)
+        self.__total_amount -= book.get_price()
 
     def display_order_items(self):
         for book in self.__book_list:
@@ -113,7 +103,7 @@ class OrderInventory:
         self.__total_items_sold = 0
 
     def __str__(self):
-        return f"{self.__name}\nTotal Qty Orders: {self.__total_orders}\nTotal Books sold: {self.__total_items_sold}\nTotal Sold $: {round(self.__total_sells, 2)}"
+        return f"{self.__name}\nTotal Qty Orders: {self.__total_orders}\nTotal Books sold: {self.__total_items_sold}\nTotal Sold: ${round(self.__total_sells, 2)}"
 
     def display_order_list(self):
         for order in self.__order_list:

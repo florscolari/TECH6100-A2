@@ -26,3 +26,10 @@ order1.get_total_amount()
 order1.get_total_items()
 order1.set_order_status(OrderStatus.PLACED)
 print(order1)
+
+
+choice = input("")
+    if choice == "1":
+        choice = book1
+    book_list.add_book(choice)
+    book_list.updateMinus1_book_list()

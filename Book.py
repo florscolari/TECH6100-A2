@@ -49,10 +49,11 @@ class Language(StrEnum):
 
 
 class Book:
-    def __init__(self, title, author, price, quantity, book_genre: BookGenre, isbn, publication_year,
+    def __init__(self, book_id, title, author, price, quantity, book_genre: BookGenre, isbn, publication_year,
                  language: Language,
                  publisher,
                  book_format: BookFormat):
+        self.__book_id : str = book_id
         self.__title : str = title
         self.__author : str = author
         self.__price : float = price
@@ -67,6 +68,7 @@ class Book:
     #To display data from a class object to users
     def __str__(self):
        return (f"------\n"
+               f"ID: {self.__book_id}\n"
                f"Title: {self.__title.title()} - Author: {self.__author.title()}\n"
                f"Genre: {self.__book_genre}\n"
                f"ISBN: {self.__isbn}, Published on {self.__publication_year} by {self.__publisher}\n"
@@ -76,18 +78,18 @@ class Book:
     #To display data from a class object to programmers
     def __repr__(self):
         return (f"------\n"
-                f"Title: {self.__title}.title(): {type(self.__title)} - Author: {self.__author}.title():"
-                f" {type(self.__author)}\n"
-                f"Genre: {self.__book_genre}: {type(self.__book_genre)}\n"
-                f"ISBN: {self.__isbn}: {type(self.__isbn)}, Published on {self.__publication_year}: {type(self.__publication_year)} by {
-                self.__publisher}: {type(self.__publisher)}\n"
-                f"Format: {self.__book_format}: {type(self.__book_format)} - Language: {self.__language}: "
-                f"{type(self.__language)}\nPrice: ${
-                self.__price}: {type(self.__price)}\nAvailable:"
-                f" {self.__quantity}: {type(self.__quantity)}")
+                f"ID: {self.__book_id}\n"
+               f"Title: {self.__title.title()} - Author: {self.__author.title()}\n"
+               f"Genre: {self.__book_genre}\n"
+               f"ISBN: {self.__isbn}, Published on {self.__publication_year} by {self.__publisher}\n"
+               f"Format: {self.__book_format} - Language: {self.__language}\nPrice: ${self.__price}\n"
+               f"Available: {self.__quantity}")
 
 
     #Book Getters
+    def get_book_id(self):
+        return self.__book_id
+
     def get_title(self):
         return self.__title
 
@@ -119,6 +121,9 @@ class Book:
         return self.__book_format
 
     # Book Setters
+    def set_book_id(self, value):
+        self.__book_id = value
+
     def set_title(self, value):
         self.__title = value
 
@@ -171,9 +176,17 @@ class BookInventory:
     def __str__(self):
         return f"{self.__name}\nTotal Qty Books: {self.__total_books}"
 
+    #Getters
+    def get_book_list(self):
+        return self.__book_list
+
     def display_book_list(self):
         for book in self.__book_list:
             print(f"{book.__str__()}")
+
+    def display_short_book_list(self):
+        for book in self.__book_list:
+            print(f"{book.get_book_id()}\t{book.get_title()}\t${book.get_price()}")
 
     def add_book(self, book: Book):
         self.__book_list.append(book)
@@ -182,3 +195,9 @@ class BookInventory:
     def remove_book(self, book: Book):
         self.__book_list.remove(book)
         self.__total_books -= book.get_quantity()
+
+    def updatePlus1_book_list(self):
+        self.__total_books += 1
+
+    def updateMinus1_book_list(self):
+        self.__total_books -= 1

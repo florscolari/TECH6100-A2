@@ -18,17 +18,17 @@ from User import User, ShippingAddress, UserInventory
 
 #6 BOOKS added to have data to handle when the program starts
 book_list = BookInventory("Book Collection")
-book1 = (Book("Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
+book1 = (Book("DU1", "Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
          BookFormat.PAPERBACK) )
-book2 = Book("The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
+book2 = Book("TM01", "The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
              BookFormat.HARDCOVER)
-book3 = Book("The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
+book3 = Book("GDT01", "The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
              BookFormat.HARDCOVER)
-book4 = Book("Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
+book4 = Book("GG01", "Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
              BookFormat.PAPERBACK)
-book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
+book5 = Book("SJ01", "Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
              BookFormat.EBOOK)
-book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
+book6 = Book("BE01", "Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
              BookFormat.HARDCOVER)
 
 #Adding 6 books to a book list/collection
@@ -107,12 +107,25 @@ user_list.add_user(user6)
 
 
 
-
+#def place_order():
 
 
 # ------------- Helper Functions  ------------- #
-def add_book():
-    pass
+def add_book(current_order):
+    print("Select a book from the list typing its ID:")
+    available_books = book_list.get_book_list()
+    book_list.display_short_book_list()
+
+    choice = input().upper().strip()
+
+    for book in available_books:
+        if book.get_book_id() == choice:
+            current_order.add_book_to_order(book)
+            print(f"Added {book.get_title()} to your order.\n"
+                  f"Cart: {current_order.get_total_items()} items\n"
+                  f"Total $: {current_order.get_total_amount()}")
+            return
+    print("Invalid book ID. Please try again or contact the Administrator.")
 
 def register_user():
     pass
@@ -144,9 +157,9 @@ def main_menu():
               f"5. View Users\n"
               f"6. View Orders\n"
               f"0. Exit Program")
-        user_choice = input("Select an option: ")
+        user_choice = input("Select an option: ").strip()
         if user_choice == "1":
-            add_book()
+            add_book(order)
         elif user_choice == "2":
             register_user()
         elif user_choice == "3":
@@ -166,6 +179,6 @@ def main_menu():
 # ------------- Main Program  ------------- #
 
 #todo: subtract qty of books from BookCollection when order is placed
-
+order = Order("SKU06", OrderStatus.NEW_ORDER)
 
 main_menu()
