@@ -57,7 +57,7 @@ class Order:
             total_items_list.append(ind_book)
         data = len(total_items_list)
         self.__total_items = data
-        print(f"Total Book Qty: {self.__total_items}")
+        return self.__total_items
 
     def get_total_amount(self):
         price_list = []
@@ -110,9 +110,10 @@ class OrderInventory:
         self.__order_list = []
         self.__total_orders = 0
         self.__total_sells = 0
+        self.__total_items_sold = 0
 
     def __str__(self):
-        return f"{self.__name}\nTotal Qty Orders: {self.__total_orders}\nTotal Sells $: {round(self.__total_sells, 2)}"
+        return f"{self.__name}\nTotal Qty Orders: {self.__total_orders}\nTotal Books sold: {self.__total_items_sold}\nTotal Sold $: {round(self.__total_sells, 2)}"
 
     def display_order_list(self):
         for order in self.__order_list:
@@ -122,8 +123,10 @@ class OrderInventory:
         self.__order_list.append(order)
         self.__total_orders += 1
         self.__total_sells += order.get_total_amount()
+        self.__total_items_sold += order.get_total_items()
 
     def remove_order(self, order: Order):
         self.__order_list.remove(order)
         self.__total_orders -= 1
         self.__total_sells -= order.get_total_amount()
+        self.__total_items_sold -= order.get_total_items()
