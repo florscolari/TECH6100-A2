@@ -13,14 +13,13 @@ class OrderStatus(StrEnum):
     SHIPPED = "Shipped"
     DELIVERED = "Delivered"
 
-#todo: Research how to get a datetime stamp
 #todo: search how to get the shipping address based on the user email
 class Order:
 
     def __init__(self, order_id, order_status=OrderStatus.NEW_ORDER, user_email=None):
         timestamp = datetime.now()
         self.__order_id = order_id
-        self.__order_date = timestamp
+        self.__order_date = timestamp.strftime("%a %d %b %H:%M")
         self.__order_status : OrderStatus = order_status
         self.__book_list = [] #list of objects as attribute of this object // books selected by the user
         self.__total_items = 0

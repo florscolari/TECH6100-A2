@@ -1,8 +1,6 @@
 from enum import StrEnum
 
 
-
-
 class BookGenre(StrEnum):
     """Creating set of immutable values for types of book"""
     FICTION = "Fiction"

@@ -1,7 +1,7 @@
 # TECH6100 Assessment 2 Florencia Scolari ID 1847863 May 2025
 # Check the full project and references on the GitHub Public Repo https://github.com/florscolari/TECH6100-A2.git
 #todo: check & complete out-of-scope features
-
+from datetime import datetime
 
 # Out of scope:
 # 1. Global command to cancel an ongoing task.
@@ -271,12 +271,6 @@ def place_order():
 
 
 
-        #new user will ask email, username, first name, last name, shipping address DONE
-        # existing account will check & retrieve data
-    #add all of it to the current order
-    #add this order to the OrderCollection
-    #show message and status 'placed'
-
 def ask_user_new_or_existing():
     """Asks user if he/she has an account or wants to create a new one to proceed with the order placement"""
     while True:
@@ -354,7 +348,8 @@ def main_menu():
 # ------------- Main Program  ------------- #
 
 #todo: subtract qty of books from BookCollection when order is placed
-#todo: what if I use timestamp as order ID?
-order = Order("SKU06", OrderStatus.NEW_ORDER)
+timestamp = datetime.now()
+order_id = timestamp.strftime("0%M%S%H")
+order = Order(order_id, OrderStatus.NEW_ORDER)
 
 main_menu()
