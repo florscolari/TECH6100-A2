@@ -20,6 +20,7 @@ class User:
         return (f"------\n"
                 f"Name: {self.__first_name} {self.__last_name}\n"
                 f"Username: {self.__username}\n"
+                f"Email: {self.__email}\n"
                 f"Phone Number: {self.__phone_number}\n" #todo: placeholders to display pretty phone: +44-20-7946-0636?
                 f"Shipping Address: {self.__shipping_address}\n"
                 f"Purchase History: {self.__purchase_history}" #todo: count previous purchases & show details?
@@ -107,6 +108,24 @@ class UserInventory:
         self.__name = name
         self.__user_list = []
         self.__total_users = 0
+        self.__email_list = []
+        self.__username_list = []
+
+    #Getters
+    def get_user_list(self):
+        return self.__user_list
+
+    def get_email_list(self):
+        self.__email_list = []
+        for user in self.__user_list:
+            self.__email_list.append(user.get_email())
+        return self.__email_list
+
+    def get_username_list(self):
+        self.__username_list = []
+        for user in self.__user_list:
+            self.__username_list.append(user.get_username())
+        return self.__username_list
 
     def __str__(self):
         return f"{self.__name}\nCurrent users: {self.__total_users}\n"

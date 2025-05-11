@@ -155,9 +155,50 @@ def remove_book(current_order):
     print("Invalid book ID. Please try again or contact the Administrator.")
 
 
+def check_email(email):
+    for e in user_list.get_email_list():
+        if e.upper().strip() == email:
+            return True
+    return False
 
+def check_username(username):
+    for user in user_list.get_username_list():
+        if user.upper().strip() == username:
+            return True
+    return False
+
+
+# set_shipping_address(email):
 def register_user():
-    print("I'm inside register_user function")
+    print("Enter the following details to create a user: ")
+    first_name = input("First name: ")
+    last_name = input("Last name: ")
+    while True:
+        email = input("Email: ")
+        try:
+            if check_email(email):
+                raise ValueError
+            break
+        except ValueError:
+            print('Invalid Email. It is already taken. Please try again.')
+
+    while True:
+        username = input("Username: ")
+        try:
+            if check_username(username):
+                raise ValueError
+            break
+        except ValueError:
+            print('Invalid Username. It is already taken. Please try again.')
+
+    password = input("Password: ")
+    phone_number = input("Phone Number: ")
+    new_user = User(first_name, last_name, username, email, password, phone_number)
+    user_list.add_user(new_user)
+    print(f"✅ User {username} has been created.")
+    return new_user
+
+
     # Ask all data needed for a user
     # Pack all data into a User object
     # Add this User object to the UserCollection
@@ -165,7 +206,7 @@ def register_user():
 
 
 def place_order():
-
+    """Displays order summary & user confirmation to proceed with existing account or new account"""
     order.display_order_summary()
     #Confirm to place the order
     print("Enter Confirm to proceed with the checkout or Cancel to go back to the main menu.")
@@ -184,13 +225,12 @@ def place_order():
 
 
 
-        #new user will ask email, username, first name, last name, shipping address
+        #new user will ask email, username, first name, last name, shipping address DONE
         # existing account will check & retrieve data
     #add all of it to the current order
     #add this order to the OrderCollection
     #show message and status 'placed'
 
-    #Ask for new user or existing account
 def ask_user_new_or_existing():
     """Asks user if he/she has an account or wants to create a new one to proceed with the order placement"""
     while True:
