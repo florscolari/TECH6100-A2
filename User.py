@@ -90,8 +90,6 @@ class User:
         else:
             raise TypeError("The shipping address must be valid.")
 
-    #todo: Don't think I need to set a purchase history, I need to calculate it & get it
-
 class ShippingAddress:
     def __init__(self, street, city, state, postal_code, country):
         self.__street: str = street
