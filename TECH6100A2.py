@@ -130,8 +130,11 @@ def add_book(current_order):
                       f"\tItems: {current_order.get_total_items()}\n"
                       f"\tTotal: ${current_order.get_total_amount()}")
                 return
-            print("We're sorry. We don't have more books available.")
-    print("Invalid book ID. Please try again or contact the Administrator.")
+            else:
+                print("We're sorry. We don't have more books available. Try with a different book or click here to join the wait list.")
+                return
+    else:
+        print("Invalid book ID. Please try again or contact the Administrator.")
 
 def remove_book(current_order):
     """Subtract 1 book at a time through its ID (user input), Displays updated Qty & $"""
