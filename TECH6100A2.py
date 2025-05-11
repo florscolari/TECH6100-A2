@@ -11,11 +11,12 @@
 
 #from enum import StrEnum
 
-from Book import Book, BookGenre, BookFormat, Language
+from Book import Book, BookGenre, BookFormat, Language, BookInventory
 #from Order import OrderStatus, Order
 from User import User, ShippingAddress, UserInventory
 
 #6 BOOKS added to have data to handle when the program starts
+book_list = BookInventory("Book Collection")
 book1 = (Book("Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
          BookFormat.PAPERBACK) )
 book2 = Book("The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
@@ -28,6 +29,14 @@ book5 = Book("Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781
              BookFormat.EBOOK)
 book6 = Book("Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
              BookFormat.HARDCOVER)
+
+#Adding 6 books to a book list/collection
+book_list.add_book(book1)
+book_list.add_book(book2)
+book_list.add_book(book3)
+book_list.add_book(book4)
+book_list.add_book(book5)
+book_list.add_book(book6)
 
 #6 USERS added to have data to handle when the program starts (3 of 6 with Address)
 user_list = UserInventory("User Collection")
@@ -72,7 +81,9 @@ def place_order():
     pass
 
 def display_books():
-    pass
+    """prints the list of Book objects: total number of books & display book details"""
+    print(book_list)
+    book_list.display_book_list()
 
 def display_users():
     """prints the list of User objects: total number of users & display user details"""
@@ -111,7 +122,7 @@ def main_menu():
             print("Invalid option. Try again using from 0 to 6 to select an option.")
 
 # ------------- Main Program  ------------- #
-book_inventory = []
+
 
 order_inventory = []
 

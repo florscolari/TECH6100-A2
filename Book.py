@@ -160,3 +160,25 @@ class Book:
         if not isinstance(new_book_format, BookFormat):
             raise ValueError("Book format must be one of available book format options. Or contact the Administrator "
                              "to add a new one.")
+
+
+class BookInventory:
+    def __init__(self, name):
+        self.__name = name
+        self.__book_list = []
+        self.__total_books = 0
+
+    def __str__(self):
+        return f"{self.__name}\nTotal Qty Books: {self.__total_books}"
+
+    def display_book_list(self):
+        for book in self.__book_list:
+            print(f"{book.__str__()}")
+
+    def add_book(self, book: Book):
+        self.__book_list.append(book)
+        self.__total_books += book.get_quantity()
+
+    def remove_book(self, book: Book):
+        self.__book_list.remove(book)
+        self.__total_books -= book.get_quantity()
