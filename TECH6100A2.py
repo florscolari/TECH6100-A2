@@ -121,9 +121,10 @@ def add_book(current_order):
     for book in available_books:
         if book.get_book_id() == choice:
             current_order.add_book_to_order(book)
-            print(f"Added {book.get_title()} to your order.\n"
-                  f"Cart: {current_order.get_total_items()} items\n"
-                  f"Total $: {current_order.get_total_amount()}")
+            print(f"✅ Added {book.get_title()} to your order.\n"
+                  f"🛍️ Your Shopping cart:\n"
+                  f"\tItems: {current_order.get_total_items()}\n"
+                  f"\tTotal: ${current_order.get_total_amount()}")
             return
     print("Invalid book ID. Please try again or contact the Administrator.")
 

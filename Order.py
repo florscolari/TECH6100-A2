@@ -54,7 +54,7 @@ class Order:
         return self.__total_items
 
     def get_total_amount(self):
-        return self.__total_amount
+        return round(self.__total_amount, 2)
 
 
     #todo: How can I know based on user email, which shipping address is correlated?
