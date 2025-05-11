@@ -1,9 +1,12 @@
 # TECH6100 Assessment 2 Florencia Scolari ID 1847863 May 2025
 # Check the full project and references on the GitHub Public Repo https://github.com/florscolari/TECH6100-A2.git
 #todo: check & complete out-of-scope features
+from tabnanny import check
 
+# Out of scope:
+# 1. Global command to cancel an ongoing task.
+# 2. Validation of data type for user inputs when registering a new user. e.g. They can put letters as a phone number.
 
-# Out of scope: global command to cancel an ongoing task.
 
 #PEP 8 Naming Conventions:
 # Variable name: lowercase_with_underscores - user_name
@@ -16,6 +19,7 @@ from Book import Book, BookGenre, BookFormat, Language, BookInventory
 from Order import OrderStatus, Order, OrderInventory
 #from Order import OrderStatus, Order
 from User import User, ShippingAddress, UserInventory
+from sandbox import password
 
 #6 BOOKS added to have data to handle when the program starts
 book_list = BookInventory("Book Collection")
@@ -108,7 +112,7 @@ user_list.add_user(user6)
 
 
 
-#def place_order():
+
 
 
 # ------------- Helper Functions  ------------- #
@@ -156,20 +160,32 @@ def remove_book(current_order):
 
 
 def check_email(email):
+    """Checks if email already exists. If true -> shows message & asks input again."""
     for e in user_list.get_email_list():
         if e.upper().strip() == email:
             return True
     return False
 
 def check_username(username):
+    """Checks if username already exists. If true -> shows message & asks input again."""
     for user in user_list.get_username_list():
         if user.upper().strip() == username:
+            return True
+    return False
+
+def login_user_order_placement():
+    username = input("Username: ")
+    username = check_username(username)
+
+    for username, password in user_list.get_username_list():
+        if username.upper().strip() == username and password.upper().strip():
             return True
     return False
 
 
 # set_shipping_address(email):
 def register_user():
+    """Takes user inputs to register a new user & adds new User object to UserInventory object"""
     print("Enter the following details to create a user: ")
     first_name = input("First name: ")
     last_name = input("Last name: ")
@@ -198,11 +214,6 @@ def register_user():
     print(f"✅ User {username} has been created.")
     return new_user
 
-
-    # Ask all data needed for a user
-    # Pack all data into a User object
-    # Add this User object to the UserCollection
-    # Show success message
 
 
 def place_order():
@@ -239,13 +250,17 @@ def ask_user_new_or_existing():
               "2. I don't have an account. I want to create one.")
         choice = input().upper().strip()
         if choice == "1":
-            print("login_user()")
+            login_user_order_placement()
             break
         elif choice == "2":
             register_user()
             break
         else:
             print("Invalid option. Please select a valid one.")
+
+
+
+
 
 
 def display_books():
