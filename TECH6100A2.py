@@ -165,7 +165,8 @@ def main_menu():
 
 # ------------- Main Program  ------------- #
 
-
+#todo: add total items sold on OrderCollection
+#todo: subtract qty of books from BookCollection when order is placed
 
 
 main_menu()
