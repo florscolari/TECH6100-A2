@@ -160,6 +160,15 @@ def register_user():
     pass
 
 def place_order():
+    #Display selection
+    #Confirm to place the order
+    #Ask for new user or existing account
+        #new user will ask email, username, first name, last name, shipping address
+        # existing account will check & retrieve data
+    #add all of it to the current order
+    #add this order to the OrderCollection
+    #show message and status 'placed'
+
     pass
 
 def display_books():
