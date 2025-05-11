@@ -56,6 +56,9 @@ class Order:
     def get_total_amount(self):
         return round(self.__total_amount, 2)
 
+    def get_book_list(self):
+        return self.__book_list
+
 
     #todo: How can I know based on user email, which shipping address is correlated?
     def get_shipping_address(self):

@@ -2,6 +2,7 @@
 # Check the full project and references on the GitHub Public Repo https://github.com/florscolari/TECH6100-A2.git
 #todo: check & complete out-of-scope features
 
+
 # Out of scope: global command to cancel an ongoing task.
 
 #PEP 8 Naming Conventions:
@@ -112,6 +113,7 @@ user_list.add_user(user6)
 
 # ------------- Helper Functions  ------------- #
 def add_book(current_order):
+    """prints the list of current books, add 1 book at a time through its ID based on user input. Displays Total Qty & $"""
     print("Select a book from the list typing its ID:")
     available_books = book_list.get_book_list()
     book_list.display_short_book_list()
@@ -120,13 +122,36 @@ def add_book(current_order):
 
     for book in available_books:
         if book.get_book_id() == choice:
-            current_order.add_book_to_order(book)
-            print(f"✅ Added {book.get_title()} to your order.\n"
+            if book.get_quantity() != 0:
+                current_order.add_book_to_order(book)
+                book.set_quantity(book.get_quantity() - 1)
+                print(f"✅ Added {book.get_title()} ({book.get_book_id()}) to your order.\n"
+                      f"🛍️ Your Shopping cart:\n"
+                      f"\tItems: {current_order.get_total_items()}\n"
+                      f"\tTotal: ${current_order.get_total_amount()}")
+                return
+            print("We're sorry. We don't have more books available.")
+    print("Invalid book ID. Please try again or contact the Administrator.")
+
+def remove_book(current_order):
+    """Subtract 1 book at a time through its ID (user input), Displays updated Qty & $"""
+    print("Select the book you want to remove from your cart by typing its ID:")
+    books_on_shopping_cart = current_order.get_book_list()
+
+    choice = input().upper().strip()
+
+    for book in books_on_shopping_cart:
+        if book.get_book_id() == choice:
+            current_order.remove_book_from_order(book)
+            book.set_quantity(book.get_quantity() + 1)
+            print(f"✅ Removed {book.get_title()} ({book.get_book_id()}) from your order.\n"
                   f"🛍️ Your Shopping cart:\n"
                   f"\tItems: {current_order.get_total_items()}\n"
                   f"\tTotal: ${current_order.get_total_amount()}")
             return
     print("Invalid book ID. Please try again or contact the Administrator.")
+
+
 
 def register_user():
     pass
@@ -138,6 +163,8 @@ def display_books():
     """prints the list of Book objects: total number of books & display book details"""
     print(book_list)
     book_list.display_book_list()
+
+
 
 def display_users():
     """prints the list of User objects: total number of users & display user details"""
@@ -152,34 +179,41 @@ def display_orders():
 def main_menu():
     while True:
         print(f"1. Add Book\n"
-              f"2. Register User\n"
+              f"2. Remove Book\n"
               f"3. Place Order\n"
-              f"4. View Books\n"
-              f"5. View Users\n"
-              f"6. View Orders\n"
+              f"4. Register User\n"
+              f"5. View Books\n"
+              f"6. View Users\n"
+              f"7. View Orders\n"
               f"0. Exit Program")
         user_choice = input("Select an option: ").strip()
         if user_choice == "1":
             add_book(order)
         elif user_choice == "2":
-            register_user()
+            if order.get_total_items() != 0:
+                remove_book(order)
+            else:
+                print("You have 0 items in your cart. Nothing to remove from.")
         elif user_choice == "3":
             place_order()
         elif user_choice == "4":
-            display_books()
+            register_user()
         elif user_choice == "5":
-            display_users()
+            display_books()
         elif user_choice == "6":
+            display_users()
+        elif user_choice == "7":
             display_orders()
         elif user_choice == "0":
             print("You have exited the program. Until next time.")
             break
         else:
-            print("Invalid option. Try again using from 0 to 6 to select an option.")
+            print("Invalid option. Try again using from 0 to 7 to select an option.")
 
 # ------------- Main Program  ------------- #
 
 #todo: subtract qty of books from BookCollection when order is placed
+#todo: what if I use timestamp as order ID?
 order = Order("SKU06", OrderStatus.NEW_ORDER)
 
 main_menu()

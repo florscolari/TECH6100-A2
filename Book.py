@@ -186,7 +186,7 @@ class BookInventory:
 
     def display_short_book_list(self):
         for book in self.__book_list:
-            print(f"{book.get_book_id()}\t{book.get_title()}\t${book.get_price()}")
+            print(f"{book.get_book_id()}\t{book.get_title()}\t${book.get_price()}\t Available: {book.get_quantity()}")
 
     def add_book(self, book: Book):
         self.__book_list.append(book)
