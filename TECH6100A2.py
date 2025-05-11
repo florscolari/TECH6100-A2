@@ -12,6 +12,7 @@
 #from enum import StrEnum
 
 from Book import Book, BookGenre, BookFormat, Language, BookInventory
+from Order import OrderStatus, Order, OrderInventory
 #from Order import OrderStatus, Order
 from User import User, ShippingAddress, UserInventory
 
@@ -37,6 +38,45 @@ book_list.add_book(book3)
 book_list.add_book(book4)
 book_list.add_book(book5)
 book_list.add_book(book6)
+
+# 4 ORDERS added to have data to handle when the program starts
+order_list = OrderInventory("Order Collection")
+
+order1 = Order("SKU01", OrderStatus.PLACED)
+order1.add_book_to_order(book1)
+order1.add_book_to_order(book2)
+order1.set_user_id("monique.dubois@outlook.fr")
+order1.set_order_date("Wed 7 May 2025 13:12:23")
+order1.set_order_status(OrderStatus.DELIVERED)
+
+order2 = Order("SKU02", OrderStatus.PLACED)
+order2.add_book_to_order(book2)
+order2.add_book_to_order(book3)
+order2.add_book_to_order(book4)
+order2.set_user_id("alice.nguyen92@outlook.com")
+order2.set_order_date("Thu 8 May 2025 12:28:58")
+order2.set_order_status(OrderStatus.DELIVERED)
+
+order3 = Order("SKU03", OrderStatus.PLACED)
+order3.add_book_to_order(book1)
+order3.add_book_to_order(book4)
+order3.add_book_to_order(book5)
+order3.set_user_id("john.martinez84@aol.co.uk")
+order3.set_order_date("Thu 9 May 2025 15:53:18")
+order3.set_order_status(OrderStatus.DELIVERED)
+
+order4 = Order("SKU04", OrderStatus.PLACED)
+order4.add_book_to_order(book6)
+order4.set_user_id("sofia.lopez22@gmail.es")
+order4.set_order_date("Thu 9 May 2025 22:05:07")
+order4.set_order_status(OrderStatus.DELIVERED)
+
+#Adding 4 orders to the order list/collection
+order_list.add_order(order1)
+order_list.add_order(order2)
+order_list.add_order(order3)
+order_list.add_order(order4)
+
 
 #6 USERS added to have data to handle when the program starts (3 of 6 with Address)
 user_list = UserInventory("User Collection")
@@ -91,7 +131,9 @@ def display_users():
     user_list.display_user_list()
 
 def display_orders():
-    pass
+    """prints the list of Order objects: total number of orders, total amount of sells & display order details"""
+    print(order_list)
+    order_list.display_order_list()
 
 def main_menu():
     while True:
@@ -124,6 +166,6 @@ def main_menu():
 # ------------- Main Program  ------------- #
 
 
-order_inventory = []
+
 
 main_menu()

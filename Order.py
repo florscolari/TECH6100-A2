@@ -1,3 +1,4 @@
+from datetime import datetime
 from enum import StrEnum
 
 import Book
@@ -16,10 +17,10 @@ class OrderStatus(StrEnum):
 #todo: search how to get the shipping address based on the user email
 class Order:
 
-    def __init__(self, order_id, order_date, order_status=OrderStatus.NEW_ORDER, user_email=None):
-
+    def __init__(self, order_id, order_status=OrderStatus.NEW_ORDER, user_email=None):
+        timestamp = datetime.now()
         self.__order_id = order_id
-        self.__order_date = order_date
+        self.__order_date = timestamp
         self.__order_status : OrderStatus = order_status
         self.__book_list = [] #list of objects as attribute of this object // books selected by the user
         self.__total_items = 0 #it'll be calculated
@@ -65,7 +66,7 @@ class Order:
             price_list.append(ind_price)
         total_amount = sum(price_list)
         total_amount = round(total_amount, 2)
-        print(f"Total: ${total_amount}")
+        return total_amount
 
 
     #todo: How can I know based on user email, which shipping address is correlated?
@@ -101,3 +102,28 @@ class Order:
     def display_order_items(self):
         for book in self.__book_list:
             print(f"{book.get_title()} - ${book.get_price()}")
+
+
+class OrderInventory:
+    def __init__(self, name):
+        self.__name = name
+        self.__order_list = []
+        self.__total_orders = 0
+        self.__total_sells = 0
+
+    def __str__(self):
+        return f"{self.__name}\nTotal Qty Orders: {self.__total_orders}\nTotal Sells $: {round(self.__total_sells, 2)}"
+
+    def display_order_list(self):
+        for order in self.__order_list:
+            print(f"{order.__str__()}")
+
+    def add_order(self, order: Order):
+        self.__order_list.append(order)
+        self.__total_orders += 1
+        self.__total_sells += order.get_total_amount()
+
+    def remove_order(self, order: Order):
+        self.__order_list.remove(order)
+        self.__total_orders -= 1
+        self.__total_sells -= order.get_total_amount()
