@@ -157,6 +157,11 @@ def remove_book(current_order):
 
 
 def register_user():
+    # Ask all data needed for a user
+    # Pack all data into a User object
+    # Add this User object to the UserCollection
+    # Show success message
+
     pass
 
 def place_order():
@@ -175,7 +180,6 @@ def display_books():
     """prints the list of Book objects: total number of books & display book details"""
     print(book_list)
     book_list.display_book_list()
-
 
 
 def display_users():
