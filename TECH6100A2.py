@@ -1,7 +1,7 @@
 # TECH6100 Assessment 2 Florencia Scolari ID 1847863 May 2025
 # Check the full project and references on the GitHub Public Repo https://github.com/florscolari/TECH6100-A2.git
 #todo: check & complete out-of-scope features
-from tabnanny import check
+
 
 # Out of scope:
 # 1. Global command to cancel an ongoing task.
@@ -19,7 +19,7 @@ from Book import Book, BookGenre, BookFormat, Language, BookInventory
 from Order import OrderStatus, Order, OrderInventory
 #from Order import OrderStatus, Order
 from User import User, ShippingAddress, UserInventory
-from sandbox import password
+
 
 #6 BOOKS added to have data to handle when the program starts
 book_list = BookInventory("Book Collection")
@@ -169,18 +169,53 @@ def check_email(email):
 def check_username(username):
     """Checks if username already exists. If true -> shows message & asks input again."""
     for user in user_list.get_username_list():
-        if user.upper().strip() == username:
+        if user.upper().strip() == username.upper().strip():
             return True
     return False
+
+def check_password(password):
+    """Checks if password matches. If False -> shows message & asks input again."""
+    for password_database in user_list.get_password_list():
+        if password_database.upper().strip() == password.upper().strip():
+            return True
+    return False
+
+
+def get_email_by_username(username):
+    username = username.upper().strip()
+    for user in user_list.get_user_list():
+        if user.get_username().upper().strip() == username:
+            return user.get_email()
+    return None
 
 def login_user_order_placement():
-    username = input("Username: ")
-    username = check_username(username)
+    while True:
+        username = input("Username: ")
+        try:
+            if not check_username(username):
+                raise ValueError
+            break
+        except ValueError:
+            print(f'Invalid Username. This username {username} is not registered. Please try again.')
 
-    for username, password in user_list.get_username_list():
-        if username.upper().strip() == username and password.upper().strip():
-            return True
-    return False
+    while True:
+        password = input("Password: ")
+        try:
+            if not check_password(password):
+                raise ValueError
+            break
+        except ValueError:
+            print(f'Invalid Password. Just for test purposes {password}. Please try again.')
+
+            print("username & password OK. You're logged in!")
+
+    user_placement = get_email_by_username(username)
+    order.set_user_id(user_placement)
+    order_list.add_order(order)
+    order.set_order_status(OrderStatus.PLACED)
+    print(f"🥳 You have placed the order successfully.\n"
+          f"Order Details:\n"
+          f"{order}")
 
 
 # set_shipping_address(email):

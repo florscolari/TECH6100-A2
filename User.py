@@ -110,6 +110,7 @@ class UserInventory:
         self.__total_users = 0
         self.__email_list = []
         self.__username_list = []
+        self.__password_list = []
 
     #Getters
     def get_user_list(self):
@@ -126,6 +127,12 @@ class UserInventory:
         for user in self.__user_list:
             self.__username_list.append(user.get_username())
         return self.__username_list
+
+    def get_password_list(self):
+        self.__password_list = []
+        for user in self.__user_list:
+            self.__password_list.append(user.get_password())
+        return self.__password_list
 
     def __str__(self):
         return f"{self.__name}\nCurrent users: {self.__total_users}\n"
