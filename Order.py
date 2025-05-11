@@ -92,10 +92,17 @@ class Order:
         self.__total_items = len(self.__book_list)
         self.__total_amount -= book.get_price()
 
+
     def display_order_items(self):
         for book in self.__book_list:
             print(f"{book.get_title()} - ${book.get_price()}")
 
+    def display_order_summary(self):
+        print(f"🛍️ Your Shopping cart:\n"
+                f"\tItems: {self.__total_items}\n"
+                f"\tTotal: ${round(self.__total_amount,2)}")
+        for book in self.__book_list:
+            print(f"\t{book.get_book_id()} {book.get_title()} - ${book.get_price()}")
 
 class OrderInventory:
     def __init__(self, name):

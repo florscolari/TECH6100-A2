@@ -157,24 +157,56 @@ def remove_book(current_order):
 
 
 def register_user():
+    print("I'm inside register_user function")
     # Ask all data needed for a user
     # Pack all data into a User object
     # Add this User object to the UserCollection
     # Show success message
 
-    pass
 
 def place_order():
-    #Display selection
+
+    order.display_order_summary()
     #Confirm to place the order
-    #Ask for new user or existing account
+    print("Enter Confirm to proceed with the checkout or Cancel to go back to the main menu.")
+    while True:
+
+        choice = input().upper().strip()
+
+        if choice == "CONFIRM":
+            ask_user_new_or_existing()
+            break
+        elif choice == "CANCEL":
+            print("You have cancel the order placement. Your selected items are still there :) ")
+            break
+        else:
+            print("Invalid option. Please select a valid one.")
+
+
+
         #new user will ask email, username, first name, last name, shipping address
         # existing account will check & retrieve data
     #add all of it to the current order
     #add this order to the OrderCollection
     #show message and status 'placed'
 
-    pass
+    #Ask for new user or existing account
+def ask_user_new_or_existing():
+    """Asks user if he/she has an account or wants to create a new one to proceed with the order placement"""
+    while True:
+        print("Do you have an account? Select an option:")
+        print("1. I have an account. I want to log-in\n"
+              "2. I don't have an account. I want to create one.")
+        choice = input().upper().strip()
+        if choice == "1":
+            print("login_user()")
+            break
+        elif choice == "2":
+            register_user()
+            break
+        else:
+            print("Invalid option. Please select a valid one.")
+
 
 def display_books():
     """prints the list of Book objects: total number of books & display book details"""
@@ -211,7 +243,10 @@ def main_menu():
             else:
                 print("You have 0 items in your cart. Nothing to remove from.")
         elif user_choice == "3":
-            place_order()
+            if order.get_total_items() != 0:
+                place_order()
+            else:
+                print("You have 0 items in your cart. No order to place. Try adding some items first.")
         elif user_choice == "4":
             register_user()
         elif user_choice == "5":
