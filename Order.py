@@ -25,16 +25,18 @@ class Order:
         self.__total_items = 0
         self.__total_amount = 0 #it'll be calculated
         self.__user_email = user_email
+        #todo:fix shipping_address
         self.__shipping_address = None
 
     def __str__(self):
+        book_list_str = "\n".join([f"- {book.display_book_short_details()}" for book in self.__book_list])
         return (f"Order ID: {self.__order_id}\nCreated: {self.__order_date}\n"
                 f"Status: {self.__order_status}\n"
-                f"Total Amount: ${round(self.__total_amount, 2)}\t Total items: {self.__total_items}\n"
+                f"Total Amount: ${round(self.__total_amount, 2)}\n"
+                f"Total items: {self.__total_items}\n"
                 f"Ordered by: {self.__user_email}\n"
-                f"Shipping Address: {self.__shipping_address}\n"
-                f"Order Details:")
-
+                f"Shipping Address: ARREGLANDO\n"
+                f"Order Details:\n{book_list_str}")
 
     #ORDER: Getters
     def get_order_id(self):
@@ -118,6 +120,9 @@ class OrderInventory:
     def display_order_list(self):
         for order in self.__order_list:
             print(f"{order.__str__()}")
+
+    def get_order_list(self):
+        return self.__order_list
 
     def add_order(self, order: Order):
         self.__order_list.append(order)

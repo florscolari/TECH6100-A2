@@ -120,6 +120,10 @@ class Book:
     def get_book_format(self):
         return self.__book_format
 
+    def display_book_short_details(self):
+        return f"{self.get_book_id()}\t{self.get_title()}\t${self.get_price()}"
+
+
     # Book Setters
     def set_book_id(self, value):
         self.__book_id = value

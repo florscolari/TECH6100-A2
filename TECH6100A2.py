@@ -251,9 +251,7 @@ def login_user_order_placement():
             print(f'Invalid Password. Just for test purposes {password}. Please try again.')
 
             print("username & password OK. You're logged in!")
-    # --- STARTS Shipping Address Block ---#
 
-    # --- ENDS Shipping Address Block ---#
     # Checks email by username & set user email as user id in this order
     user_placement = get_email_by_username(username)
     order.set_user_id(user_placement)
@@ -365,8 +363,23 @@ def register_book():
     print("TODO: Register a new book to the book_list")
 
 def view_order_by_id():
-    print("TODO: Check order by id")
+    """Checks an order by its order ID & retrieves the order details"""
+    while True:
+        print("Enter your order ID or Cancel: ")
+        # Checking username & assigning new_shipping_address to the User object with that username
+        choice = input().upper().strip()
 
+        if choice == "CANCEL":
+            main_menu()
+            return
+
+        for item in order_list.get_order_list():
+            if item.get_order_id().upper().strip() == choice:
+                print(item)
+                item.display_order_items()
+                return
+
+        print("Invalid option. Please select a valid one.")
 
 def display_books():
     """prints the list of Book objects: total number of books & display book details"""
