@@ -667,7 +667,7 @@ def welcome():
           "Explore our selection of Best Sellers, eBooks, Audiobooks and much more.\n"
           "What would you like to do next? Select an option:\n")
 
-# ------------- Main Program  ------------- #
+# ------------- STARTS Main Program  ------------- #
 
 timestamp = datetime.now()
 order_id = timestamp.strftime("0%M%S%H")
@@ -676,3 +676,7 @@ order = Order(order_id, OrderStatus.NEW_ORDER)
 # e.g. A staff member of the Bookiverse store that can also register and buy as a new different user."
 welcome()
 main_menu()
+
+# ------------- ENDS Main Program  ------------- #
+
+## End of the script - 1847863 F. Scolari KBS May 2025 TECH6100 Assessment 2
