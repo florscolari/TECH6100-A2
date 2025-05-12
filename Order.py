@@ -113,7 +113,7 @@ class OrderInventory:
 
     def __str__(self):
         return (f"🛍️  {self.__name}  🛍️\n\tTotal Qty Orders: {self.__total_orders}\n\tTotal Books sold:"
-                f" {self.__total_items_sold}\n\tTotal Sold: ${round(self.__total_sells, 2)}")
+                f" {self.__total_items_sold}\n\tTotal Sold: ${round(self.__total_sells, 2)}\n")
 
     def display_order_list(self):
         for order in self.__order_list:

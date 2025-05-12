@@ -94,7 +94,7 @@ book_list.add_book(book4)
 book_list.add_book(book5)
 book_list.add_book(book6)
 
-# 7 ORDERS added to have data to handle when the program starts
+# 10 ORDERS added to have data to handle when the program starts
 order_list = OrderInventory("Order Collection")
 
 order99 = Order("0482110", user0, OrderStatus.PLACED)
@@ -145,7 +145,28 @@ order6.set_order_date("Sat 10 May 2025 11:13:22")
 order6.set_order_status(OrderStatus.DELIVERED)
 user0.add_order(order6)
 
-#Adding 7 orders to the order list/collection
+order7 = Order("0099932", user4, OrderStatus.DELIVERED)
+order7.add_book_to_order(book1)
+order7.set_order_date("Fri 9 May 2025 7:11:03")
+order7.set_order_status(OrderStatus.DELIVERED)
+user4.add_order(order7)
+
+order8 = Order("0099930", user6, OrderStatus.DELIVERED)
+order8.add_book_to_order(book3)
+order8.add_book_to_order(book6)
+order8.add_book_to_order(book2)
+order8.set_order_date("Fri 9 May 2025 4:09:56")
+order8.set_order_status(OrderStatus.DELIVERED)
+user6.add_order(order8)
+
+order9 = Order("0099931", user6, OrderStatus.DELIVERED)
+order9.add_book_to_order(book5)
+order9.add_book_to_order(book4)
+order9.set_order_date("Wed 7 May 2025 16:07:13")
+order9.set_order_status(OrderStatus.DELIVERED)
+user6.add_order(order9)
+
+#Adding 10 orders to the order list/collection
 order_list.add_order(order99)
 order_list.add_order(order1)
 order_list.add_order(order2)
@@ -153,6 +174,9 @@ order_list.add_order(order3)
 order_list.add_order(order4)
 order_list.add_order(order5)
 order_list.add_order(order6)
+order_list.add_order(order7)
+order_list.add_order(order8)
+order_list.add_order(order9)
 
 
 
