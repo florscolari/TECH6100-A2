@@ -220,14 +220,13 @@ def login_user_order_placement():
             print("username & password OK. You're logged in!")
     # --- STARTS Shipping Address Block ---#
 
-
     # --- ENDS Shipping Address Block ---#
     # Checks email by username & set user email as user id in this order
     user_placement = get_email_by_username(username)
     order.set_user_id(user_placement)
     # Checks shipping address by username & set shipping address for this order
     user_shipping_address = get_shipping_address_by_username(username)
-    order.set_user_id(user_shipping_address)
+    order.set_shipping_address(user_shipping_address)
     # Adds this order to the Order Collection (available from View Orders option)
     order_list.add_order(order)
     # Updates the Qty of the Book Collection (Book Collection qty - Order qty)
@@ -238,8 +237,27 @@ def login_user_order_placement():
           f"Order Details:\n"
           f"{order}")
 
+def register_shipping_address(username):
+    """Takes user inputs to register a new shipping & Creates a new Shipping Address Object"""
+    print("Enter details for your shipping address: ")
+    street = input("Street: ")
+    city = input("City: ")
+    state = input("State: ")
+    postal_code = input("Postal Code: ")
+    country = input("Country: ")
 
-# set_shipping_address(email):
+    #Wrapping up user inputs in a ShippingAddress object
+    new_shipping_address = ShippingAddress(street, city, state, postal_code, country)
+
+    #Checking username & assigning new_shipping_address to the User object with that username
+    username = username.upper().strip()
+    for user in user_list.get_user_list():
+        if user.get_username().upper().strip() == username:
+            user.set_shipping_address(new_shipping_address)
+
+    print(f"✅ Shipping Address {username} has been added to your account.\n"
+          f"{new_shipping_address}")
+
 def register_user():
     """Takes user inputs to register a new user & adds new User object to UserInventory object"""
     print("Enter the following details to create a user: ")
@@ -267,6 +285,8 @@ def register_user():
     phone_number = input("Phone Number: ")
     new_user = User(first_name, last_name, username, email, password, phone_number)
     user_list.add_user(new_user)
+    register_shipping_address(username)
+
     print(f"✅ User {username} has been created.")
     return new_user
 

@@ -2,6 +2,7 @@ from datetime import datetime
 from enum import StrEnum
 
 import Book
+from User import ShippingAddress
 
 
 class OrderStatus(StrEnum):
@@ -69,6 +70,9 @@ class Order:
 
     def set_order_date(self, value):
         self.__order_date = value
+
+    def set_shipping_address(self, address: ShippingAddress):
+        self.__shipping_address = address
 
     def set_order_status(self, new_order_status: OrderStatus):
         """Set Order status if it is within class OrderStatus. If not -> show message"""
