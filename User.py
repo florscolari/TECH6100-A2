@@ -16,10 +16,10 @@ class User:
                                     f" {order.get_order_date()}"
                                     for order in self.__order_history])
         return (f"# --------------- #\n"
-                f"Name: {self.__first_name} {self.__last_name}\n"
+                f"Name: {self.__first_name.title()} {self.__last_name.title()}\n"
                 f"Username: {self.__username}\n"
                 f"Email: {self.__email}\n"
-                f"Phone Number: {self.__phone_number}\n" #todo: placeholders to display pretty phone: +44-20-7946-0636?
+                f"Phone Number: {self.__phone_number}\n"
                 f"Shipping Address: {self.__shipping_address}\n"
                 f"Purchase History: {len(self.__order_history)} orders\n"
                 f"{order_list_str}\n"
@@ -101,7 +101,8 @@ class ShippingAddress:
         self.__country: str = country
 
     def __str__(self):
-        return f"{self.__street} {self.__city} {self.__state} ({self.__zip_code}) {self.__country}"
+        return (f"{self.__street.title()} {self.__city.title()} {self.__state.upper()} ({self.__zip_code})"
+                f" {self.__country.title()}")
 
 
 class UserInventory:

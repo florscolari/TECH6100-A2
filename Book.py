@@ -67,13 +67,13 @@ class Book:
 
     #To display data from a class object to users
     def __str__(self):
-       return (f"------\n"
+       return (f"# --------------- #\n"
                f"ID: {self.__book_id}\n"
                f"Title: {self.__title.title()} - Author: {self.__author.title()}\n"
                f"Genre: {self.__book_genre}\n"
                f"ISBN: {self.__isbn}, Published on {self.__publication_year} by {self.__publisher}\n"
                f"Format: {self.__book_format} - Language: {self.__language}\nPrice: ${self.__price}\nAvailable:"
-               f" {self.__quantity}")
+               f" {self.__quantity}\n")
 
     #To display data from a class object to programmers
     def __repr__(self):
@@ -179,7 +179,8 @@ class BookInventory:
         self.__book_id_list = []
 
     def __str__(self):
-        return f"{self.__name}\nTotal Qty Books: {self.__total_books}"
+        return (f"📚️  {self.__name}  📚\n\t"
+                f"Total Qty Books: {self.__total_books}\n")
 
     #Getters
     def get_book_list(self):

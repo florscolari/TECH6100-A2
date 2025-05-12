@@ -1,6 +1,5 @@
 # TECH6100 Assessment 2 Florencia Scolari ID 1847863 May 2025
 # Check the full project and references on the GitHub Public Repo https://github.com/florscolari/TECH6100-A2.git
-#todo: check & complete out-of-scope features
 from datetime import datetime
 
 # User for Testing Purposes:
@@ -13,7 +12,7 @@ from datetime import datetime
 
 # Out of scope:
 # 1. Global command to cancel an ongoing task.
-# 2. Validation of data type for user inputs when registering a new user. e.g. They can put letters as a phone number.
+# 2. No user input validation for: phone, email & shipping address.
 # 3. Turning back for case: If user selects she/he has an account and doesn't know username & password, no way to recover from that. Dead End.
 # 4. Login as different user types at tge beginning. You can create account & login to place an order.
 # 5. Although I have set __str__ & __repr__ for Book, Order & User, I've used __str__ in most cases instead of __repr__
