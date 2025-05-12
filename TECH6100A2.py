@@ -181,8 +181,6 @@ order_list.add_order(order9)
 
 
 
-
-
 # ------------- Helper Functions  ------------- #
 def add_book(current_order):
     """prints the list of current books, add 1 book at a time through its ID based on user input. Displays Total Qty & $"""
@@ -203,10 +201,10 @@ def add_book(current_order):
                       f"\tTotal: ${current_order.get_total_amount()}")
                 return
             else:
-                print("We're sorry. We don't have more books available. Try with a different book or click here to join the wait list.")
+                print("🙏 We're sorry. We don't have more books available. Try with a different book or click here to join the wait list.")
                 return
     else:
-        print("Invalid book ID. Please try again or contact the Administrator.")
+        print("❌ Invalid book ID. Please try again or contact the Administrator.")
 
 def remove_book(current_order):
     """Subtract 1 book at a time through its ID (user input), Displays updated Qty & $"""
@@ -224,7 +222,7 @@ def remove_book(current_order):
                   f"\tItems: {current_order.get_total_items()}\n"
                   f"\tTotal: ${current_order.get_total_amount()}")
             return
-    print("Invalid book ID. Please try again or contact the Administrator.")
+    print("❌ Invalid book ID. Please try again or contact the Administrator.")
 
 
 def check_email(email):
@@ -277,7 +275,7 @@ def login_user_order_placement():
                 raise ValueError
             break
         except ValueError:
-            print(f'Invalid Username. This username {username} is not registered. Please try again.')
+            print(f"❌ Invalid Username. This username {username} is not registered. Please try again.")
 
     while True:
         password = input("Password: ")
@@ -286,9 +284,9 @@ def login_user_order_placement():
                 raise ValueError
             break
         except ValueError:
-            print(f'Invalid Password. Just for test purposes {password}. Please try again.')
+            print(f"❌ Invalid Password. Just for test purposes {password}. Please try again.")
 
-            print("username & password OK. You're logged in!")
+            print("Username & password OK. You're logged in 🚀")
 
 
     # Check username & Retrieves the User object that matches this username
@@ -350,7 +348,7 @@ def register_user():
                 raise ValueError
             break
         except ValueError:
-            print('Invalid Email. It is already taken. Please try again.')
+            print("❌ Invalid Email. It is already taken. Please try again.")
 
     while True:
         username = input("Username: ")
@@ -359,7 +357,7 @@ def register_user():
                 raise ValueError
             break
         except ValueError:
-            print('Invalid Username. It is already taken. Please try again.')
+            print("❌ Invalid Username. It is already taken. Please try again.")
 
     password = input("Password: ")
     phone_number = input("Phone Number: ")
@@ -384,10 +382,10 @@ def place_order():
             ask_user_new_or_existing()
             break
         elif choice == "CANCEL":
-            print("You have cancel the order placement. Your selected items are still there :) ")
+            print("You have canceled the order placement. But your selected items are still there... just in case 😊")
             break
         else:
-            print("Invalid option. Please select a valid one.")
+            print("❌ Invalid option. Please select a valid one.")
 
 
 
@@ -405,7 +403,7 @@ def ask_user_new_or_existing():
             register_user()
             break
         else:
-            print("Invalid option. Please select a valid one.")
+            print("❌ Invalid option. Please select a valid one.")
 
 
 def check_book_id(book_id):
@@ -446,7 +444,7 @@ def set_book_genre(book):
             print("A Book item cannot be entered without book genre.")
             break
         else:
-            print("Invalid option. Try again using from 0 to 5 to select an option.")
+            print("❌ Invalid option. Try again using from 0 to 5 to select an option.")
 
 
 def set_book_language(book):
@@ -476,7 +474,7 @@ def set_book_language(book):
             print("A Book item cannot be entered without language.")
             break
         else:
-            print("Invalid option. Try again using from 0 to 4 to select an option.")
+            print("❌ Invalid option. Try again using from 0 to 4 to select an option.")
 
 
 def set_book_format(book):
@@ -506,7 +504,7 @@ def set_book_format(book):
             print("A Book item cannot be entered without book format.")
             break
         else:
-            print("Invalid option. Try again using from 0 to 4 to select an option.")
+            print("❌ Invalid option. Try again using from 0 to 4 to select an option.")
 
 def get_valid_float(user_value):
     while True:
@@ -538,7 +536,7 @@ def register_book():
                 raise ValueError
             break
         except ValueError:
-            print('Invalid Book ID. It is already taken. Please try again.')
+            print("❌ Invalid Book ID. It is already taken. Please try again.")
 
     title = input("Title: ")
     author = input("Author: ")
@@ -598,7 +596,7 @@ def view_order_by_id():
                 print(item)
                 return
 
-        print("Invalid option. Please select a valid one.")
+        print("❌ Invalid option. Please select a valid one.")
 
 def display_books():
     """prints the list of Book objects: total number of books & display book details"""
@@ -616,6 +614,7 @@ def display_orders():
     order_list.display_order_list()
 
 def main_menu():
+    """Runs the main menu to display the options to the users"""
     while True:
         print(f"🛍️ Orders:\n"
               f"1. Add Book\n"
@@ -656,16 +655,24 @@ def main_menu():
         elif user_choice == "9":
             display_users()
         elif user_choice == "0":
-            print("You have exited the program. Until next time.")
+            print("You have exited Bookiverse. See you next time!")
             break
         else:
-            print("Invalid option. Try again using from 0 to 9 to select an option.")
+            print("❌ Invalid option. Try again using from 0 to 9 to select an option.")
+
+def welcome():
+    """To welcome the user when starting the program. As eCommerce, no login is required to browse site."""
+    print("-" * 40)
+    print("🌎📚 Welcome to Bookiverse 📚🌎\n"
+          "Explore our selection of Best Sellers, eBooks, Audiobooks and much more.\n"
+          "What would you like to do next? Select an option:\n")
 
 # ------------- Main Program  ------------- #
-
 
 timestamp = datetime.now()
 order_id = timestamp.strftime("0%M%S%H")
 order = Order(order_id, OrderStatus.NEW_ORDER)
-
+#Assumption made: User has permission to see other people's orders.
+# e.g. A staff member of the Bookiverse store that can also register and buy as a new different user."
+welcome()
 main_menu()
