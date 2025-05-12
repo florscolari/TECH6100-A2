@@ -9,8 +9,6 @@ class User:
         self.__shipping_address = None #Here I found the concept of Composition
         self.__order_history = []  #list of Order objects as Purchase History
 
-#todo: display only __repr__ method for each class
-
     #To display data from a class object to users
     def __str__(self):
         order_list_str = "\n".join([f"- ID: {order.get_order_id()}\tItems: {order.get_total_items()}\tAmount: $"
@@ -36,9 +34,7 @@ class User:
                 f"Password: {self.__password} : {type(self.__password)}\n"
                 f"Phone Number: {self.__phone_number} : {type(self.__phone_number)}\n"
                 f"Shipping Address: {self.__shipping_address} : {type(self.__shipping_address)}\n"
-                f"Purchase History: {self.__order_history} : {type(self.__order_history)}" #todo: count
-                # previous purchases &
-                # show details?
+                f"Purchase History: {self.__order_history} : {type(self.__order_history)}"
         )
 
     #User Getters:

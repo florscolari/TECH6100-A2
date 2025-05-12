@@ -16,6 +16,8 @@ from datetime import datetime
 # 2. Validation of data type for user inputs when registering a new user. e.g. They can put letters as a phone number.
 # 3. Turning back for case: If user selects she/he has an account and doesn't know username & password, no way to recover from that. Dead End.
 # 4. Login as different user types at tge beginning. You can create account & login to place an order.
+# 5. Although I have set __str__ & __repr__ for Book, Order & User, I've used __str__ in most cases instead of __repr__
+
 
 # PEP 8 Naming Conventions:
 # Variable name: lowercase_with_underscores - user_name
