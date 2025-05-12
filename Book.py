@@ -1,5 +1,7 @@
 from enum import StrEnum
 
+from Order import Order
+
 
 class BookGenre(StrEnum):
     """Creating set of immutable values for types of book"""
@@ -178,6 +180,9 @@ class BookInventory:
     def get_book_list(self):
         return self.__book_list
 
+    def get_total_books(self):
+        return self.__total_books
+
     def display_book_list(self):
         for book in self.__book_list:
             print(f"{book.__str__()}")
@@ -199,3 +204,6 @@ class BookInventory:
 
     def updateMinus1_book_list(self):
         self.__total_books -= 1
+
+    def subtract_order_book(self, order: Order):
+        self.__total_books -= order.get_total_items()

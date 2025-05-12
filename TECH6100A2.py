@@ -212,6 +212,7 @@ def login_user_order_placement():
     user_placement = get_email_by_username(username)
     order.set_user_id(user_placement)
     order_list.add_order(order)
+    book_list.subtract_order_book(order)
     order.set_order_status(OrderStatus.PLACED)
     print(f"🥳 You have placed the order successfully.\n"
           f"Order Details:\n"
@@ -347,7 +348,6 @@ def main_menu():
 
 # ------------- Main Program  ------------- #
 
-#todo: subtract qty of books from BookCollection when order is placed
 timestamp = datetime.now()
 order_id = timestamp.strftime("0%M%S%H")
 order = Order(order_id, OrderStatus.NEW_ORDER)
