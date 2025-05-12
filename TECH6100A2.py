@@ -182,13 +182,23 @@ def check_password(password):
 
 
 def get_email_by_username(username):
+    """Retrieves the user email by its username"""
     username = username.upper().strip()
     for user in user_list.get_user_list():
         if user.get_username().upper().strip() == username:
             return user.get_email()
     return None
 
+def get_shipping_address_by_username(username):
+    """Retrieves the shipping address by its username"""
+    username = username.upper().strip()
+    for user in user_list.get_user_list():
+        if user.get_username().upper().strip() == username:
+            return user.get_shipping_address()
+    return None
+
 def login_user_order_placement():
+    """Checks if username & password exists. If yes, set username for current order & places the order."""
     while True:
         username = input("Username: ")
         try:
@@ -208,11 +218,21 @@ def login_user_order_placement():
             print(f'Invalid Password. Just for test purposes {password}. Please try again.')
 
             print("username & password OK. You're logged in!")
+    # --- STARTS Shipping Address Block ---#
 
+
+    # --- ENDS Shipping Address Block ---#
+    # Checks email by username & set user email as user id in this order
     user_placement = get_email_by_username(username)
     order.set_user_id(user_placement)
+    # Checks shipping address by username & set shipping address for this order
+    user_shipping_address = get_shipping_address_by_username(username)
+    order.set_user_id(user_shipping_address)
+    # Adds this order to the Order Collection (available from View Orders option)
     order_list.add_order(order)
+    # Updates the Qty of the Book Collection (Book Collection qty - Order qty)
     book_list.subtract_order_book(order)
+    # Sets order status as placed
     order.set_order_status(OrderStatus.PLACED)
     print(f"🥳 You have placed the order successfully.\n"
           f"Order Details:\n"
