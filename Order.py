@@ -15,7 +15,6 @@ class OrderStatus(StrEnum):
     DELIVERED = "Delivered"
 
 class Order:
-
     def __init__(self, order_id, order_status=OrderStatus.NEW_ORDER, user_email=None):
         timestamp = datetime.now()
         self.__order_id = order_id
