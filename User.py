@@ -7,23 +7,24 @@ class User:
         self.__password : str = password
         self.__phone_number : str = phone_number
         self.__shipping_address = None #Here I found the concept of Composition
-        self.__purchase_history = None  # todo: new class for this one? purchase_history (array/object)
+        self.__order_history = []  #list of Order objects as Purchase History
+
+#todo: display only __repr__ method for each class
 
     #To display data from a class object to users
     def __str__(self):
-        if self.__shipping_address is None:
-            self.__shipping_address = "-"
-
-        if self.__purchase_history is None:
-            self.__purchase_history = "-"
-
+        order_list_str = "\n".join([f"- ID: {order.get_order_id()}\tItems: {order.get_total_items()}\tAmount: $"
+                                    f"{order.get_total_amount()}\tDate:"
+                                    f" {order.get_order_date()}"
+                                    for order in self.__order_history])
         return (f"------\n"
                 f"Name: {self.__first_name} {self.__last_name}\n"
                 f"Username: {self.__username}\n"
                 f"Email: {self.__email}\n"
                 f"Phone Number: {self.__phone_number}\n" #todo: placeholders to display pretty phone: +44-20-7946-0636?
                 f"Shipping Address: {self.__shipping_address}\n"
-                f"Purchase History: {self.__purchase_history}" #todo: count previous purchases & show details?
+                f"Purchase History: {len(self.__order_history)} orders\n"
+                f"{order_list_str}" #todo: count previous purchases & show details?
         )
 
     # To display data from a class object to programmers
@@ -35,7 +36,7 @@ class User:
                 f"Password: {self.__password} : {type(self.__password)}\n"
                 f"Phone Number: {self.__phone_number} : {type(self.__phone_number)}\n"
                 f"Shipping Address: {self.__shipping_address} : {type(self.__shipping_address)}\n"
-                f"Purchase History: {self.__purchase_history} : {type(self.__purchase_history)}" #todo: count
+                f"Purchase History: {self.__order_history} : {type(self.__order_history)}" #todo: count
                 # previous purchases &
                 # show details?
         )
@@ -62,8 +63,8 @@ class User:
     def get_shipping_address(self):
         return self.__shipping_address
 
-    def get_purchase_history(self):
-        return self.__purchase_history
+    def get_order_history(self):
+        return self.__order_history
 
     # User Setters:
     def set_first_name(self, value):
@@ -83,6 +84,10 @@ class User:
 
     def set_phone_number(self, value):
         self.__phone_number = value
+
+    def add_order(self, order):
+        self.__order_history.append(order)
+
 
     """Set Shipping Address if is within ShippingAddress class. If not -> show message"""
     def set_shipping_address(self,value):
