@@ -29,83 +29,6 @@ from Order import OrderStatus, Order, OrderInventory
 #from Order import OrderStatus, Order
 from User import User, ShippingAddress, UserInventory
 
-
-#6 BOOKS added to have data to handle when the program starts
-book_list = BookInventory("Book Collection")
-book1 = (Book("DU1", "Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
-         BookFormat.PAPERBACK) )
-book2 = Book("TM01", "The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
-             BookFormat.HARDCOVER)
-book3 = Book("GDT01", "The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
-             BookFormat.HARDCOVER)
-book4 = Book("GG01", "Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
-             BookFormat.PAPERBACK)
-book5 = Book("SJ01", "Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
-             BookFormat.EBOOK)
-book6 = Book("BE01", "Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
-             BookFormat.HARDCOVER)
-
-#Adding 6 books to a book list/collection
-book_list.add_book(book1)
-book_list.add_book(book2)
-book_list.add_book(book3)
-book_list.add_book(book4)
-book_list.add_book(book5)
-book_list.add_book(book6)
-
-# 4 ORDERS added to have data to handle when the program starts
-order_list = OrderInventory("Order Collection")
-
-order1 = Order("0482110", OrderStatus.PLACED)
-order1.add_book_to_order(book1)
-order1.add_book_to_order(book2)
-order1.set_user_id("monique.dubois@outlook.fr")
-order1.set_order_date("Wed 7 May 2025 13:12:23")
-order1.set_order_status(OrderStatus.DELIVERED)
-
-order2 = Order("0473112", OrderStatus.PLACED)
-order2.add_book_to_order(book2)
-order2.add_book_to_order(book3)
-order2.add_book_to_order(book4)
-order2.set_user_id("alice.nguyen92@outlook.com")
-order2.set_order_date("Thu 8 May 2025 12:28:58")
-order2.set_order_status(OrderStatus.DELIVERED)
-
-order3 = Order("0464118", OrderStatus.PLACED)
-order3.add_book_to_order(book1)
-order3.add_book_to_order(book4)
-order3.add_book_to_order(book5)
-order3.set_user_id("john.martinez84@aol.co.uk")
-order3.set_order_date("Thu 9 May 2025 15:53:18")
-order3.set_order_status(OrderStatus.DELIVERED)
-
-order4 = Order("0450108", OrderStatus.PLACED)
-order4.add_book_to_order(book6)
-order4.set_user_id("sofia.lopez22@gmail.es")
-order4.set_order_date("Thu 9 May 2025 22:05:07")
-order4.set_order_status(OrderStatus.DELIVERED)
-
-order5 = Order("0450106", OrderStatus.DELIVERED)
-order5.add_book_to_order(book4)
-order5.set_user_id("sofia.lopez22@gmail.es")
-order5.set_order_date("Sat 10 May 2025 14:03:02")
-order5.set_order_status(OrderStatus.DELIVERED)
-
-order6 = Order("0011122", OrderStatus.DELIVERED)
-order6.add_book_to_order(book3)
-order6.set_user_id("test@t.com.au")
-order6.set_order_date("Sat 10 May 2025 11:13:22")
-order6.set_order_status(OrderStatus.DELIVERED)
-
-#Adding 5 orders to the order list/collection
-order_list.add_order(order1)
-order_list.add_order(order2)
-order_list.add_order(order3)
-order_list.add_order(order4)
-order_list.add_order(order5)
-order_list.add_order(order6)
-
-
 #7 USERS added to have data to handle when the program starts
 user_list = UserInventory("User Collection")
 
@@ -146,6 +69,85 @@ user6 = User("Monique", "Dubois", "momo_reads", "monique.dubois@outlook.fr", "M0
 address6 = ShippingAddress("14 Rue de Rivoli", "Paris", "FR", "75004", "France")
 user6.set_shipping_address(address6)
 user_list.add_user(user6)
+
+
+#6 BOOKS added to have data to handle when the program starts
+book_list = BookInventory("Book Collection")
+book1 = (Book("DU1", "Dune", "Frank Herbert", 14.99, 8, BookGenre.SCIFI, "9780441172719", 1965, Language.ENGLISH, "Chilton Books",
+         BookFormat.PAPERBACK) )
+book2 = Book("TM01", "The Martian", "Andy Weir", 12.50, 4, BookGenre.SCIFI, "9780804139021", 2014, Language.ENGLISH, "Crown Publishing Group",
+             BookFormat.HARDCOVER)
+book3 = Book("GDT01", "The Girl with the Dragon Tattoo", "Stieg Larsson", 11.99, 5, BookGenre.MYSTERY, "9780307949486", 2005, Language.FRENCH, "Norstedts Förlag",
+             BookFormat.HARDCOVER)
+book4 = Book("GG01", "Gone Girl", "Gillian Flynn", 10.99, 8, BookGenre.MYSTERY, "9780307588371", 2012, Language.PORTUGUESE, "Crown Publishing Group",
+             BookFormat.PAPERBACK)
+book5 = Book("SJ01", "Steve Jobs", "Walter Isaacson", 18, 16, BookGenre.BIOGRAPHY, "9781451648539", 2011, Language.SPANISH, "Simon & Schuster",
+             BookFormat.EBOOK)
+book6 = Book("BE01", "Becoming", "Michelle Obama", 16.99, 12, BookGenre.BIOGRAPHY, "9781524763138", 2018, Language.ENGLISH, "Crown Publishing Group",
+             BookFormat.HARDCOVER)
+
+#Adding 6 books to a book list/collection
+book_list.add_book(book1)
+book_list.add_book(book2)
+book_list.add_book(book3)
+book_list.add_book(book4)
+book_list.add_book(book5)
+book_list.add_book(book6)
+
+# 7 ORDERS added to have data to handle when the program starts
+order_list = OrderInventory("Order Collection")
+
+order99 = Order("0482110", user0, OrderStatus.PLACED)
+order99.add_book_to_order(book1)
+order99.add_book_to_order(book2)
+order99.set_order_date("Wed 7 May 2025 13:12:23")
+order99.set_order_status(OrderStatus.SHIPPED)
+
+order1 = Order("0482110", user1, OrderStatus.PLACED)
+order1.add_book_to_order(book1)
+order1.add_book_to_order(book2)
+order1.set_order_date("Wed 7 May 2025 13:12:23")
+order1.set_order_status(OrderStatus.DELIVERED)
+
+order2 = Order("0473112", user2, OrderStatus.PLACED)
+order2.add_book_to_order(book2)
+order2.add_book_to_order(book3)
+order2.add_book_to_order(book4)
+order2.set_order_date("Thu 8 May 2025 12:28:58")
+order2.set_order_status(OrderStatus.DELIVERED)
+
+order3 = Order("0464118", user3, OrderStatus.PLACED)
+order3.add_book_to_order(book1)
+order3.add_book_to_order(book4)
+order3.add_book_to_order(book5)
+order3.set_order_date("Thu 9 May 2025 15:53:18")
+order3.set_order_status(OrderStatus.DELIVERED)
+
+order4 = Order("0450108", user2, OrderStatus.PLACED)
+order4.add_book_to_order(book6)
+order4.set_order_date("Thu 9 May 2025 22:05:07")
+order4.set_order_status(OrderStatus.DELIVERED)
+
+order5 = Order("0450106", user5, OrderStatus.DELIVERED)
+order5.add_book_to_order(book4)
+order5.set_order_date("Sat 10 May 2025 14:03:02")
+order5.set_order_status(OrderStatus.DELIVERED)
+
+order6 = Order("0011122", user0, OrderStatus.DELIVERED)
+order6.add_book_to_order(book3)
+order6.set_order_date("Sat 10 May 2025 11:13:22")
+order6.set_order_status(OrderStatus.DELIVERED)
+
+#Adding 7 orders to the order list/collection
+order_list.add_order(order99)
+order_list.add_order(order1)
+order_list.add_order(order2)
+order_list.add_order(order3)
+order_list.add_order(order4)
+order_list.add_order(order5)
+order_list.add_order(order6)
+
+
 
 
 
@@ -215,12 +217,12 @@ def check_password(password):
     return False
 
 
-def get_email_by_username(username):
+def get_user_by_username(username):
     """Retrieves the user email by its username"""
     username = username.upper().strip()
     for user in user_list.get_user_list():
         if user.get_username().upper().strip() == username:
-            return user.get_email()
+            return user
     return None
 
 def get_shipping_address_by_username(username):
@@ -228,7 +230,7 @@ def get_shipping_address_by_username(username):
     username = username.upper().strip()
     for user in user_list.get_user_list():
         if user.get_username().upper().strip() == username:
-            return user.get_shipping_address()
+            return user
     return None
 
 def login_user_order_placement():
@@ -253,12 +255,13 @@ def login_user_order_placement():
 
             print("username & password OK. You're logged in!")
 
-    # Checks email by username & set user email as user id in this order
-    user_placement = get_email_by_username(username)
-    order.set_user_id(user_placement)
-    # Checks shipping address by username & set shipping address for this order
-    user_shipping_address = get_shipping_address_by_username(username)
-    order.set_shipping_address(user_shipping_address)
+
+    # Check username & Retrieves the User object that matches this username
+    user = get_user_by_username(username)
+
+    # Set the User object for this order
+    order.set_user(user)
+
     # Adds this order to the Order Collection (available from View Orders option)
     order_list.add_order(order)
     # Updates the Qty of the Book Collection (Book Collection qty - Order qty)
@@ -268,9 +271,10 @@ def login_user_order_placement():
     print(f"🥳 You have placed the order successfully.\n"
           f"Your Order:\n"
           f"{order}")
-#todo: shipping address
+
 def register_shipping_address(username):
-    """Takes user inputs to register a new shipping & Creates a new Shipping Address Object"""
+    """Takes user inputs to register a new shipping & Creates a new Shipping Address Object & Assign it to User
+    Object"""
     print("Enter details for your shipping address: ")
     street = input("Street: ")
     city = input("City: ")

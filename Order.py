@@ -2,7 +2,7 @@ from datetime import datetime
 from enum import StrEnum
 
 import Book
-from User import ShippingAddress
+from User import User
 
 
 class OrderStatus(StrEnum):
@@ -15,7 +15,9 @@ class OrderStatus(StrEnum):
     DELIVERED = "Delivered"
 
 class Order:
-    def __init__(self, order_id, order_status=OrderStatus.NEW_ORDER, user_email=None):
+    """switching approaches: this will take the whole User object as argument to create an Order object,
+    not only user_email"""
+    def __init__(self, order_id, user, order_status=OrderStatus.NEW_ORDER):
         timestamp = datetime.now()
         self.__order_id = order_id
         self.__order_date = timestamp.strftime("%a %d %b %H:%M")
@@ -23,19 +25,18 @@ class Order:
         self.__book_list = [] #list of objects as attribute of this object // books selected by the user
         self.__total_items = 0
         self.__total_amount = 0 #it'll be calculated
-        self.__user_email = user_email
-        #todo:fix shipping_address
-        self.__shipping_address = None
+        self.__user: User = user #This is the entire User object
 
     def __str__(self):
         book_list_str = "\n".join([f"- {book.display_book_short_details()}" for book in self.__book_list])
-        return (f"Order ID: {self.__order_id}\nCreated: {self.__order_date}\n"
+        return (f"# --------------- #\n"
+                f"Order ID: {self.__order_id}\nCreated: {self.__order_date}\n"
                 f"Status: {self.__order_status}\n"
                 f"Total Amount: ${round(self.__total_amount, 2)}\n"
                 f"Total items: {self.__total_items}\n"
-                f"Ordered by: {self.__user_email}\n"
-                f"Shipping Address: ARREGLANDO\n"
-                f"Order Details:\n{book_list_str}")
+                f"Ordered by: {self.__user.get_email()}\n"
+                f"Shipping Address: {self.__user.get_shipping_address()}\n"
+                f"Order Details:\n{book_list_str}\n")
 
     #ORDER: Getters
     def get_order_id(self):
@@ -48,7 +49,7 @@ class Order:
         return self.__order_status
 
     def get_user_id(self):
-        return self.__user_email
+        return self.__user.get_email()
 
     def get_total_items(self):
         return self.__total_items
@@ -60,7 +61,7 @@ class Order:
         return self.__book_list
 
     def get_shipping_address(self):
-        return self.__shipping_address
+        return self.__user.get_shipping_address()
 
     #ORDER: Setters
     def set_order_id(self, value):
@@ -69,17 +70,14 @@ class Order:
     def set_order_date(self, value):
         self.__order_date = value
 
-    def set_shipping_address(self, address: ShippingAddress):
-        self.__shipping_address = address
+    def set_user(self, user):
+        self.__user = user
 
     def set_order_status(self, new_order_status: OrderStatus):
         """Set Order status if it is within class OrderStatus. If not -> show message"""
         self.__order_status = new_order_status
         if not isinstance(new_order_status, OrderStatus):
             raise ValueError("Order status must be one of valid status options. Or contact the Administrator.")
-
-    def set_user_id(self, value):
-        self.__user_email = value
 
 
     #Other Order Methods
@@ -114,7 +112,8 @@ class OrderInventory:
         self.__total_items_sold = 0
 
     def __str__(self):
-        return f"{self.__name}\nTotal Qty Orders: {self.__total_orders}\nTotal Books sold: {self.__total_items_sold}\nTotal Sold: ${round(self.__total_sells, 2)}"
+        return (f"🛍️  {self.__name}  🛍️\n\tTotal Qty Orders: {self.__total_orders}\n\tTotal Books sold:"
+                f" {self.__total_items_sold}\n\tTotal Sold: ${round(self.__total_sells, 2)}")
 
     def display_order_list(self):
         for order in self.__order_list:
