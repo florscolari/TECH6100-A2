@@ -265,9 +265,9 @@ def login_user_order_placement():
     # Sets order status as placed
     order.set_order_status(OrderStatus.PLACED)
     print(f"🥳 You have placed the order successfully.\n"
-          f"Order Details:\n"
+          f"Your Order:\n"
           f"{order}")
-
+#todo: shipping address
 def register_shipping_address(username):
     """Takes user inputs to register a new shipping & Creates a new Shipping Address Object"""
     print("Enter details for your shipping address: ")
@@ -286,7 +286,7 @@ def register_shipping_address(username):
         if user.get_username().upper().strip() == username:
             user.set_shipping_address(new_shipping_address)
 
-    print(f"✅ Shipping Address {username} has been added to your account.\n"
+    print(f"✅ Shipping Address has been added to your account.\n"
           f"{new_shipping_address}")
 
 def register_user():
@@ -320,7 +320,6 @@ def register_user():
 
     print(f"✅ User {username} has been created.")
     return new_user
-
 
 
 def place_order():
@@ -376,7 +375,6 @@ def view_order_by_id():
         for item in order_list.get_order_list():
             if item.get_order_id().upper().strip() == choice:
                 print(item)
-                item.display_order_items()
                 return
 
         print("Invalid option. Please select a valid one.")
