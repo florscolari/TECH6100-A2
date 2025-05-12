@@ -366,10 +366,45 @@ def check_book_id(book_id):
             return True
     return False
 
+def set_book_genre(book):
+    """Takes user inputs & retrieves a book genre based on user choice"""
+    while True:
+        print(f"📘 Available Book Formats:\n"
+              f"Select an option from the list:\n"
+              f"1. Fiction\n"
+              f"2. Non-Fiction\n"
+              f"3. Sci-Fi\n"
+              f"4. Mistery\n"
+              f"5. Biography\n"
+              f"0. Cancel\n")
+        user_choice = input("Select an option: ").strip()
+        if user_choice == "1":
+            book.set_book_genre(BookGenre.FICTION)
+            break
+        elif user_choice == "2":
+            book.set_book_genre(BookGenre.NONFICTION)
+            break
+        elif user_choice == "3":
+            book.set_book_genre(BookGenre.SCIFI)
+            break
+        elif user_choice == "4":
+            book.set_book_genre(BookGenre.MYSTERY)
+            break
+        elif user_choice == "5":
+            book.set_book_genre(BookGenre.BIOGRAPHY)
+            break
+        elif user_choice == "0":
+            print("A Book item cannot be entered without book genre.")
+            break
+        else:
+            print("Invalid option. Try again using from 0 to 5 to select an option.")
+
+
 def set_book_language(book):
     """Takes user inputs & retrieve a language based on user choice"""
     while True:
         print(f"📘 Available Languages:\n"
+              f"Select an option from the list:\n"
               f"1. English\n"
               f"2. Spanish\n"
               f"3. Portuguese\n"
@@ -395,6 +430,35 @@ def set_book_language(book):
             print("Invalid option. Try again using from 0 to 4 to select an option.")
 
 
+def set_book_format(book):
+    """Takes user inputs & retrieves a book format based on user choice"""
+    while True:
+        print(f"📘 Available Book Formats:\n"
+              f"Select an option from the list:\n"
+              f"1. Hardcover\n"
+              f"2. Paperback\n"
+              f"3. eBook\n"
+              f"4. Audiobook\n"
+              f"0. Cancel\n")
+        user_choice = input("Select an option: ").strip()
+        if user_choice == "1":
+            book.set_book_format(BookFormat.HARDCOVER)
+            break
+        elif user_choice == "2":
+            book.set_book_format(BookFormat.PAPERBACK)
+            break
+        elif user_choice == "3":
+            book.set_book_format(BookFormat.EBOOK)
+            break
+        elif user_choice == "4":
+            book.set_book_format(BookFormat.AUDIOBOOK)
+            break
+        elif user_choice == "0":
+            print("A Book item cannot be entered without book format.")
+            break
+        else:
+            print("Invalid option. Try again using from 0 to 4 to select an option.")
+
 def register_book():
     """Takes user inputs to register a new book & adds new Book object to BookInventory object"""
     new_book = Book(None, None, None, None, None, None, None, None,None ,None, None)
@@ -415,23 +479,39 @@ def register_book():
     # todo: validate that enters number
     quantity = int(input("Quantity: "))
 
-    set_book_language(new_book)
-    if new_book.get_language() is None:
+    set_book_genre(new_book)
+    if new_book.get_book_genre() is None:
         print("Book registration canceled.")
         return
+    genre = new_book.get_book_genre()
 
     isbn = input("ISBN: ")
     publisher = input("Publisher: ")
     # todo: validate that enters number
-    publication_year = int(input())
+    publication_year = int(input("Publication Year: "))
 
-    #book_format = set_book_format()
+    set_book_language(new_book)
+    if new_book.get_language() is None:
+        print("Book registration canceled.")
+        return
+    book_language = new_book.get_language()
 
+    set_book_format(new_book)
+    if new_book.get_book_format() is None:
+        print("Book registration canceled.")
+        return
+    book_format = new_book.get_book_format()
 
-    #new_book = Book(book_id, title, author, price, quantity, genre, isbn, publisher, publication_year, book_language, book_format)
-    #book_list.add_book(new_book)
-    #print(f"✅ Book {new_book} has been created.")
-    #return new_book
+    #formatting before wrap it up as Book object
+    book_id = book_id.upper()
+    title = title.title()
+    author = author.title()
+    price = price.__float__()
+
+    new_book = Book(book_id, title, author, price, quantity, genre, isbn, publication_year, book_language, publisher, book_format)
+    book_list.add_book(new_book)
+    print(f"✅ Book {new_book.get_book_id()} {new_book.get_title()} with {new_book.get_quantity()} units has been created.")
+    return new_book
 
 
 def view_order_by_id():
@@ -515,7 +595,7 @@ def main_menu():
 
 # ------------- Main Program  ------------- #
 
-#todo: View order by order_id
+
 timestamp = datetime.now()
 order_id = timestamp.strftime("0%M%S%H")
 order = Order(order_id, OrderStatus.NEW_ORDER)
