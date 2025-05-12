@@ -17,14 +17,14 @@ class User:
                                     f"{order.get_total_amount()}\tDate:"
                                     f" {order.get_order_date()}"
                                     for order in self.__order_history])
-        return (f"------\n"
+        return (f"# --------------- #\n"
                 f"Name: {self.__first_name} {self.__last_name}\n"
                 f"Username: {self.__username}\n"
                 f"Email: {self.__email}\n"
                 f"Phone Number: {self.__phone_number}\n" #todo: placeholders to display pretty phone: +44-20-7946-0636?
                 f"Shipping Address: {self.__shipping_address}\n"
                 f"Purchase History: {len(self.__order_history)} orders\n"
-                f"{order_list_str}" #todo: count previous purchases & show details?
+                f"{order_list_str}\n"
         )
 
     # To display data from a class object to programmers
@@ -140,7 +140,8 @@ class UserInventory:
         return self.__password_list
 
     def __str__(self):
-        return f"{self.__name}\nCurrent users: {self.__total_users}\n"
+        return (f"🙋‍♀️️  {self.__name}  🙋‍♀️\n\t"
+                f"Current users: {self.__total_users}\n")
 
     def display_user_list(self):
         for user in self.__user_list:
