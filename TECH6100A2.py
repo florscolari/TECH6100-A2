@@ -265,7 +265,10 @@ def get_shipping_address_by_username(username):
     return None
 
 def login_user_order_placement():
-    """Checks if username & password exists. If yes, set username for current order & places the order."""
+    """Checks if username & password exists. If yes, set username for current order & places the order. Then resets
+    to an empty order to start all over again"""
+    global order #To use & change the order variable inside this function
+
     while True:
         username = input("Username: ")
         try:
@@ -305,6 +308,12 @@ def login_user_order_placement():
     print(f"🥳 You have placed the order successfully.\n"
           f"Your Order:\n"
           f"{order}")
+    #Restarts a new order
+    new_timestamp = datetime.now()
+    new_order_id = new_timestamp.strftime("0%M%S%H")
+    #This will create a new Order object to restart with an empty order after placement
+    order = Order(new_order_id, OrderStatus.NEW_ORDER)
+
 
 def register_shipping_address(username):
     """Takes user inputs to register a new shipping & Creates a new Shipping Address Object & Assign it to User
