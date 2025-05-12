@@ -288,16 +288,17 @@ def ask_user_new_or_existing():
         else:
             print("Invalid option. Please select a valid one.")
 
+def register_book():
+    print("TODO: Register a new book to the book_list")
 
-
-
+def view_order_by_id():
+    print("TODO: Check order by id")
 
 
 def display_books():
     """prints the list of Book objects: total number of books & display book details"""
     print(book_list)
     book_list.display_book_list()
-
 
 def display_users():
     """prints the list of User objects: total number of users & display user details"""
@@ -311,14 +312,19 @@ def display_orders():
 
 def main_menu():
     while True:
-        print(f"1. Add Book\n"
+        print(f"🛍️ Orders:\n"
+              f"1. Add Book\n"
               f"2. Remove Book\n"
               f"3. Place Order\n"
-              f"4. Register User\n"
-              f"5. View Books\n"
-              f"6. View Users\n"
-              f"7. View Orders\n"
-              f"0. Exit Program")
+              f"4. Check Order Status\n"
+              f"5. View Orders\n\n"
+              f"📚 Books:\n"
+              f"6. Register New Book\n"
+              f"7. View Books\n\n"
+              f"🙋‍♀️ Users:\n"
+              f"8. Register New User\n"
+              f"9. View Users\n"
+              f"0. Exit Program\n")
         user_choice = input("Select an option: ").strip()
         if user_choice == "1":
             add_book(order)
@@ -333,21 +339,26 @@ def main_menu():
             else:
                 print("You have 0 items in your cart. No order to place. Try adding some items first.")
         elif user_choice == "4":
-            register_user()
+            view_order_by_id()
         elif user_choice == "5":
-            display_books()
-        elif user_choice == "6":
-            display_users()
-        elif user_choice == "7":
             display_orders()
+        elif user_choice == "6":
+            register_book()
+        elif user_choice == "7":
+            display_books()
+        elif user_choice == "8":
+            register_user()
+        elif user_choice == "9":
+            display_users()
         elif user_choice == "0":
             print("You have exited the program. Until next time.")
             break
         else:
-            print("Invalid option. Try again using from 0 to 7 to select an option.")
+            print("Invalid option. Try again using from 0 to 9 to select an option.")
 
 # ------------- Main Program  ------------- #
 
+#todo: View order by order_id
 timestamp = datetime.now()
 order_id = timestamp.strftime("0%M%S%H")
 order = Order(order_id, OrderStatus.NEW_ORDER)
