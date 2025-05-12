@@ -358,8 +358,81 @@ def ask_user_new_or_existing():
         else:
             print("Invalid option. Please select a valid one.")
 
+
+def check_book_id(book_id):
+    """Checks if Book ID exists, if Yes -> shows a message"""
+    for book in book_list.get_book_id_list():
+        if book.upper().strip() == book_id.upper().strip():
+            return True
+    return False
+
+def set_book_language(book):
+    """Takes user inputs & retrieve a language based on user choice"""
+    while True:
+        print(f"📘 Available Languages:\n"
+              f"1. English\n"
+              f"2. Spanish\n"
+              f"3. Portuguese\n"
+              f"4. French\n"
+              f"0. Cancel\n")
+        user_choice = input("Select an option: ").strip()
+        if user_choice == "1":
+            book.set_language(Language.ENGLISH)
+            break
+        elif user_choice == "2":
+            book.set_language(Language.SPANISH)
+            break
+        elif user_choice == "3":
+            book.set_language(Language.PORTUGUESE)
+            break
+        elif user_choice == "4":
+            book.set_language(Language.FRENCH)
+            break
+        elif user_choice == "0":
+            print("A Book item cannot be entered without language.")
+            break
+        else:
+            print("Invalid option. Try again using from 0 to 4 to select an option.")
+
+
 def register_book():
-    print("TODO: Register a new book to the book_list")
+    """Takes user inputs to register a new book & adds new Book object to BookInventory object"""
+    new_book = Book(None, None, None, None, None, None, None, None,None ,None, None)
+    print("Enter the following details to register a new book: ")
+    while True:
+        book_id = input("Book ID 'e.g. Initials & number': ")
+        try:
+            if check_book_id(book_id):
+                raise ValueError
+            break
+        except ValueError:
+            print('Invalid Book ID. It is already taken. Please try again.')
+
+    title = input("Title: ")
+    author = input("Author: ")
+    #todo: validate that enters number
+    price = float(input("Price: "))
+    # todo: validate that enters number
+    quantity = int(input("Quantity: "))
+
+    set_book_language(new_book)
+    if new_book.get_language() is None:
+        print("Book registration canceled.")
+        return
+
+    isbn = input("ISBN: ")
+    publisher = input("Publisher: ")
+    # todo: validate that enters number
+    publication_year = int(input())
+
+    #book_format = set_book_format()
+
+
+    #new_book = Book(book_id, title, author, price, quantity, genre, isbn, publisher, publication_year, book_language, book_format)
+    #book_list.add_book(new_book)
+    #print(f"✅ Book {new_book} has been created.")
+    #return new_book
+
 
 def view_order_by_id():
     """Checks an order by its order ID & retrieves the order details"""

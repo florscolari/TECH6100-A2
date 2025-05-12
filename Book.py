@@ -176,6 +176,7 @@ class BookInventory:
         self.__name = name
         self.__book_list = []
         self.__total_books = 0
+        self.__book_id_list = []
 
     def __str__(self):
         return f"{self.__name}\nTotal Qty Books: {self.__total_books}"
@@ -183,6 +184,12 @@ class BookInventory:
     #Getters
     def get_book_list(self):
         return self.__book_list
+
+    def get_book_id_list(self):
+        self.__book_id_list = []
+        for book in self.__book_list:
+            self.__book_id_list.append(book.get_book_id())
+        return self.__book_id_list
 
     def get_total_books(self):
         return self.__total_books
