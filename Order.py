@@ -14,7 +14,6 @@ class OrderStatus(StrEnum):
     SHIPPED = "Shipped"
     DELIVERED = "Delivered"
 
-#todo: search how to get the shipping address based on the user email
 class Order:
 
     def __init__(self, order_id, order_status=OrderStatus.NEW_ORDER, user_email=None):
@@ -59,8 +58,6 @@ class Order:
     def get_book_list(self):
         return self.__book_list
 
-
-    #todo: How can I know based on user email, which shipping address is correlated?
     def get_shipping_address(self):
         return self.__shipping_address
 

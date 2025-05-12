@@ -6,3 +6,11 @@
 
      Password
      M1chael#Grow
+
+# User for Testing Purposes:
+# First Name: Elle
+# Last Name: Test
+# Username: test2025
+# Email: test@t.com.au
+# Password: 123
+# Order ID: 0011122

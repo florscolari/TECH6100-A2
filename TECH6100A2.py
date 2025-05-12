@@ -3,12 +3,20 @@
 #todo: check & complete out-of-scope features
 from datetime import datetime
 
+# User for Testing Purposes:
+# First Name: Elle
+# Last Name: Test
+# Username: test2025
+# Email: test@t.com.au
+# Password: 123
+# Order ID: 0011122
+
 # Out of scope:
 # 1. Global command to cancel an ongoing task.
 # 2. Validation of data type for user inputs when registering a new user. e.g. They can put letters as a phone number.
+# 3. Turning back for case: If user selects she/he has an account and doesn't know username & password, no way to recover from that. Dead End.
 
-
-#PEP 8 Naming Conventions:
+# PEP 8 Naming Conventions:
 # Variable name: lowercase_with_underscores - user_name
 # Function name: verb_lowercase_underscore - send_email()
 # Class name: CapitaliseWords - UseNouns
@@ -47,14 +55,14 @@ book_list.add_book(book6)
 # 4 ORDERS added to have data to handle when the program starts
 order_list = OrderInventory("Order Collection")
 
-order1 = Order("SKU01", OrderStatus.PLACED)
+order1 = Order("0482110", OrderStatus.PLACED)
 order1.add_book_to_order(book1)
 order1.add_book_to_order(book2)
 order1.set_user_id("monique.dubois@outlook.fr")
 order1.set_order_date("Wed 7 May 2025 13:12:23")
 order1.set_order_status(OrderStatus.DELIVERED)
 
-order2 = Order("SKU02", OrderStatus.PLACED)
+order2 = Order("0473112", OrderStatus.PLACED)
 order2.add_book_to_order(book2)
 order2.add_book_to_order(book3)
 order2.add_book_to_order(book4)
@@ -62,7 +70,7 @@ order2.set_user_id("alice.nguyen92@outlook.com")
 order2.set_order_date("Thu 8 May 2025 12:28:58")
 order2.set_order_status(OrderStatus.DELIVERED)
 
-order3 = Order("SKU03", OrderStatus.PLACED)
+order3 = Order("0464118", OrderStatus.PLACED)
 order3.add_book_to_order(book1)
 order3.add_book_to_order(book4)
 order3.add_book_to_order(book5)
@@ -70,21 +78,43 @@ order3.set_user_id("john.martinez84@aol.co.uk")
 order3.set_order_date("Thu 9 May 2025 15:53:18")
 order3.set_order_status(OrderStatus.DELIVERED)
 
-order4 = Order("SKU04", OrderStatus.PLACED)
+order4 = Order("0450108", OrderStatus.PLACED)
 order4.add_book_to_order(book6)
 order4.set_user_id("sofia.lopez22@gmail.es")
 order4.set_order_date("Thu 9 May 2025 22:05:07")
 order4.set_order_status(OrderStatus.DELIVERED)
 
-#Adding 4 orders to the order list/collection
+order5 = Order("0450106", OrderStatus.DELIVERED)
+order5.add_book_to_order(book4)
+order5.set_user_id("sofia.lopez22@gmail.es")
+order5.set_order_date("Sat 10 May 2025 14:03:02")
+order5.set_order_status(OrderStatus.DELIVERED)
+
+order6 = Order("0011122", OrderStatus.DELIVERED)
+order6.add_book_to_order(book3)
+order6.set_user_id("test@t.com.au")
+order6.set_order_date("Sat 10 May 2025 11:13:22")
+order6.set_order_status(OrderStatus.DELIVERED)
+
+#Adding 5 orders to the order list/collection
 order_list.add_order(order1)
 order_list.add_order(order2)
 order_list.add_order(order3)
 order_list.add_order(order4)
+order_list.add_order(order5)
+order_list.add_order(order6)
 
 
-#6 USERS added to have data to handle when the program starts (3 of 6 with Address)
+#7 USERS added to have data to handle when the program starts
 user_list = UserInventory("User Collection")
+
+#Recommend to use 1st user for testing purposes
+user0 = User("Elle", "Test", "test2025", "test@t.com.au", "123", "00000000000")
+#Method to set shipping address for a user
+address0 = ShippingAddress("000 William Street", "Perth", "WA", "6000", "Australia")
+user0.set_shipping_address(address0)
+user_list.add_user(user0)
+
 user1 = User("Alice", "Nguyen", "booklover92", "alice.nguyen92@outlook.com", "A1ic3!Readz", "12025550136")
 #Method to set shipping address for a user
 address1 = ShippingAddress("123 Elm Street", "San Francisco", "CA", "94102", "USA")
@@ -102,16 +132,19 @@ user3.set_shipping_address(address3)
 user_list.add_user(user3)
 
 user4 = User("Sofia", "Lopez", "mysteryfan22", "sofia.lopez22@gmail.es", "S0fia&Mystery", "34911234567")
+address4 = ShippingAddress("Calle Gran Vía 12", "Madrid", "MD", "28013", "Spain")
+user4.set_shipping_address(address4)
 user_list.add_user(user4)
 
 user5 = User("Michael", "Singh", "read4growth", "michael.singh.reads@example.in", "M1chael#Grow", "912240011122")
+address5 = ShippingAddress("501 Bandra Kurla Complex", "Mumbai", "MH", "400051", "India")
+user5.set_shipping_address(address5)
 user_list.add_user(user5)
 
 user6 = User("Monique", "Dubois", "momo_reads", "monique.dubois@outlook.fr", "M0nique!Books", "33123456789")
+address6 = ShippingAddress("14 Rue de Rivoli", "Paris", "FR", "75004", "France")
+user6.set_shipping_address(address6)
 user_list.add_user(user6)
-
-
-
 
 
 
