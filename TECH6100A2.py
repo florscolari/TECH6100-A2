@@ -509,6 +509,25 @@ def set_book_format(book):
         else:
             print("Invalid option. Try again using from 0 to 4 to select an option.")
 
+def get_valid_float(user_value):
+    while True:
+        try:
+            user_input = input(user_value)
+            value = float(user_input) #It checks if it is a float number, if not -> shows error
+            return value
+        except ValueError:
+            print(f"❌ Invalid value. Try again using only numbers with decimals or positive ones.")
+
+def get_valid_integer(user_value):
+    while True:
+        try:
+            user_input = input(user_value)
+            value = int(user_input)
+            return value
+        except ValueError:
+            print(f"❌ Invalid value. Try again using only integers (no decimals, no negative numbers).")
+
+
 def register_book():
     """Takes user inputs to register a new book & adds new Book object to BookInventory object"""
     new_book = Book(None, None, None, None, None, None, None, None,None ,None, None)
@@ -524,10 +543,9 @@ def register_book():
 
     title = input("Title: ")
     author = input("Author: ")
-    #todo: validate that enters number
-    price = float(input("Price: "))
-    # todo: validate that enters number
-    quantity = int(input("Quantity: "))
+
+    price = get_valid_float("Price: ")
+    quantity = get_valid_integer("Quantity: ")
 
     set_book_genre(new_book)
     if new_book.get_book_genre() is None:
@@ -535,10 +553,11 @@ def register_book():
         return
     genre = new_book.get_book_genre()
 
-    isbn = input("ISBN: ")
+    isbn = get_valid_integer("ISBN (Type only numbers): ")
+
     publisher = input("Publisher: ")
-    # todo: validate that enters number
-    publication_year = int(input("Publication Year: "))
+
+    publication_year = get_valid_integer("Publication Year: ")
 
     set_book_language(new_book)
     if new_book.get_language() is None:
@@ -556,7 +575,7 @@ def register_book():
     book_id = book_id.upper()
     title = title.title()
     author = author.title()
-    price = price.__float__()
+    publisher = publisher.title()
 
     new_book = Book(book_id, title, author, price, quantity, genre, isbn, publication_year, book_language, publisher, book_format)
     book_list.add_book(new_book)
